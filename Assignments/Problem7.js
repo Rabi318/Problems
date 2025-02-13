@@ -2,64 +2,53 @@ let sentenceBuilder = {
   subject: "I",
   verb: "am",
   object: "coding",
-  invalidPropertyFlag: false, // Flag to track invalid property update
+  invalidPropertyFlag: false,
 
   // Method to build the sentence
   buildSentence: function () {
-    // If any property is empty, return "Incomplete sentence"
     if (!this.subject || !this.verb || !this.object) {
       return "Incomplete sentence";
     }
 
-    // If the flag is set to true, return "Invalid property"
     if (this.invalidPropertyFlag) {
       return "Invalid property";
     }
 
-    // Otherwise, build the sentence if all properties exist
-    return this.subject + " " + this.verb + " " + this.object; // Concatenate the sentence
+    return this.subject + " " + this.verb + " " + this.object;
   },
 
   // Method to update a property dynamically
   updateProperty: function (property, value) {
-    // Reset the invalid property flag
     this.invalidPropertyFlag = false;
 
-    // Check if the property exists and is valid
     if (property === "subject") {
-      this[property] = value; // Update the subject
-      // If the subject is "The cat", automatically set the verb to "is"
+      this[property] = value;
       if (value === "The cat" && !this.verb.startsWith("is")) {
-        this.verb = "is " + this.verb.split(" ")[1]; // Maintain the action part (e.g., "learning")
+        this.verb = "is " + this.verb.split(" ")[1];
       }
     } else if (property === "verb" || property === "object") {
-      this[property] = value; // Update the verb or object
+      this[property] = value;
     } else {
-      this.invalidPropertyFlag = true; // Set the flag if invalid property is updated
-      return "Invalid property"; // Return error message for invalid property
+      this.invalidPropertyFlag = true;
+      return "Invalid property";
     }
   },
 };
 
 // Example usage:
 
-// Before updating, it will print the initial sentence: "I am coding"
-console.log(sentenceBuilder.buildSentence()); // Output: "I am coding"
+console.log(sentenceBuilder.buildSentence());
 
-// Updating the verb to "am learning"
 sentenceBuilder.updateProperty("verb", "am learning");
-// Now it should print: "I am learning coding"
-console.log(sentenceBuilder.buildSentence()); // Output: "I am learning coding"
 
-// Update the subject to "The cat"
+console.log(sentenceBuilder.buildSentence());
+
 sentenceBuilder.updateProperty("subject", "The cat");
-// The verb should automatically change to "is" and keep the action (learning)
-console.log(sentenceBuilder.buildSentence()); // Output: "The cat is learning coding"
 
-// Trying to update a non-existent property "mood"
+console.log(sentenceBuilder.buildSentence());
+
 sentenceBuilder.updateProperty("mood", "happy");
-console.log(sentenceBuilder.buildSentence()); // Output: "Invalid property"
+console.log(sentenceBuilder.buildSentence());
 
-// Example 5: Updating the verb to an empty string
 sentenceBuilder.updateProperty("verb", "");
-console.log(sentenceBuilder.buildSentence()); // Output: "Incomplete sentence"
+console.log(sentenceBuilder.buildSentence());
