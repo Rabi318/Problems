@@ -1,3 +1,4 @@
+//! Dynamic User Role Message with Object Properties
 function getAccess(user) {
   return user.role === "admin"
     ? user.active
