@@ -1,23 +1,22 @@
-class Animal {
-  constructor() {
-    this.type = "Animal";
-  }
-  sound() {
-    console.log("Animal sound");
-  }
+function Animal() {
+  this.type = "Animal";
 }
 
-class Dog extends Animal {
-  constructor() {
-    super();
-  }
-  sound() {
-    console.log("Bark");
-  }
+Animal.prototype.sound = function () {
+  console.log("Animal sound");
+};
+
+function Dog() {
+  Animal.call(this);
 }
 
 Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.contructor = Dog;
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.sound = function () {
+  console.log("Bark");
+};
 
 const myDog = new Dog();
+
 myDog.sound();
