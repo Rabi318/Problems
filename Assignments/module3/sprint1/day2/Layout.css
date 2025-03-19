@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background: #87ceeb;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+.section {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  background-color: #2547c4;
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+td {
+  border: 1px solid #ddd;
+  padding: 3px;
+  text-align: left;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form textarea {
+  display: block;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+button {
+  padding: 5px 5px;
+  border: 1px solid #ddd;
+}
+
+footer {
+  background-color: rgb(54, 10, 129);
+  height: 20px;
+  width: 100%;
+  bottom: 0;
+}
