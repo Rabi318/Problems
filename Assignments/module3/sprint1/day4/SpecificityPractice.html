@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        color: red;
+      }
+
+      .highlight {
+        color: blue;
+      }
+
+      #special {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="highlight" id="special">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum
+      dolores veniam sapiente?
+      <!-- Element selector: This has the lower specificity that  is 1 -->
+      <!-- Class selector: This has the lower specificity that is 10 -->
+      <!-- Id selector: This has the higher specificity that is 100 -->
+      <!-- Therefore the color of the text will be green -->
+    </div>
+  </body>
+</html>
