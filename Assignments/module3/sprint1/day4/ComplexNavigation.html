@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complex Navigation Bar</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      nav {
+        background-color: #333;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+      }
+      nav ul li a {
+        text-decoration: none;
+      }
+      nav li {
+        padding: 5px;
+      }
+
+      .section-1 a {
+        color: lightcoral;
+      }
+      .section-2 a {
+        color: lightgreen;
+      }
+      .section-3 a {
+        color: lightblue;
+      }
+      nav a:hover {
+        background-color: #555;
+        color: white;
+      }
+      nav a:active {
+        background-color: #222;
+      }
+
+      nav ul li a {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      nav ul.section-1 li a {
+        font-weight: bold;
+      }
+      nav ul.section-2 li a {
+        font-style: italic;
+      }
+
+      nav > ul > li > a {
+        font-size: 18px;
+        padding: 12px;
+      }
+
+      a[href^="https"] {
+        color: yellow;
+        font-weight: bold;
+      }
+
+      nav ul.section-1 a:hover,
+      nav ul.section-2 a:hover,
+      nav ul.section-3 a:hover {
+        background-color: #444; /* Slightly different hover style for each section */
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul class="section-1">
+        <li><a href="#home">Home</a></li>
+        <li><a href="https://example.com">About</a></li>
+        <li><a href="#services">Services</a></li>
+      </ul>
+      <ul class="section-2">
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="https://secure-site.com">Security</a></li>
+      </ul>
+      <ul class="section-3">
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#careers">Careers</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
