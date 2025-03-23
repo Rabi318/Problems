@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This is a sample website showcase" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta name="author" content="Rabinarayan" />
+    <title>HTML structure and Tags</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1 id="name">Rabinarayan</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact Me</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="profile">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvi7HpQ-_PMSMOFrj1hwjp6LDcI-jm3Ro0Xw&s"
+          alt="me"
+        />
+        <div>
+          <h3>Hi, I'm Rabinarayan</h3>
+          <p>
+            I am a
+            <span class="typewriter">Web Developer | Freelancer | MERN </span>
+          </p>
+          <p>
+            Welcome to my portfolio website! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Impedit, consequuntur?
+          </p>
+          <div class="social-icons">
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- !Projects section -->
+
+    <section>
+      <h2>My Projects</h2>
+      <div class="project-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <img
+            src="https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=1024x1024&w=0&k=20&c=z8_rWaI8x4zApNEEG9DnWlGXyDIXe-OmsAyQ5fGPVV8="
+            alt="Project1"
+            class="project-img"
+          />
+          <div class="project-info">
+            <div class="project-title">Project One</div>
+            <div class="project-description">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis
+              architecto optio exercitationem!
+            </div>
+            <a href="#" class="view-project">View Project</a>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card">
+          <img
+            src="https://media.istockphoto.com/id/1550071750/photo/green-tea-tree-leaves-camellia-sinensis-in-organic-farm-sunlight-fresh-young-tender-bud.jpg?s=612x612&w=0&k=20&c=RC_xD5DY5qPH_hpqeOY1g1pM6bJgGJSssWYjVIvvoLw="
+            alt="Project2"
+            class="project-img"
+          />
+          <div class="project-info">
+            <div class="project-title">Project Two</div>
+            <div class="project-description">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis
+              architecto optio exercitationem!
+            </div>
+            <a href="#" class="view-project">View Project</a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <img
+            src="https://m.media-amazon.com/images/I/710GjkD28nL._AC_UF1000,1000_QL80_.jpg"
+            alt="Project3"
+            class="project-img"
+          />
+          <div class="project-info">
+            <div class="project-title">Project Three</div>
+            <div class="project-description">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis
+              architecto optio exercitationem!
+            </div>
+            <a href="#" class="view-project">View Project</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Project Info Table -->
+    <section id="project-info">
+      <h2>Project Information</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Tech Used</th>
+            <th>Completion Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Proejct One</td>
+            <td>A Personal Portfolio</td>
+            <td>HTML, CSS, JavaScript</td>
+            <td>Jan 2025</td>
+          </tr>
+          <tr>
+            <td>Proejct Two</td>
+            <td>An E-commerece website</td>
+            <td>React, Node.js, MongoDB</td>
+            <td>Feb 2025</td>
+          </tr>
+          <tr>
+            <td>Project Three</td>
+            <td>A Blogging Website</td>
+            <td>Java, Angular, MySQL</td>
+            <td>March 2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- !Contact section -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form action="">
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Enter Your Name"
+          />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+          />
+        </div>
+        <div>
+          <label for="message">Message:</label>
+          <textarea name="message" id="message"></textarea>
+        </div>
+        <input type="submit" class="submit-btn" value="Submit" />
+      </form>
+    </section>
+    <hr />
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 All rights reserved.</p>
+    </footer>
+  </body>
+</html>
