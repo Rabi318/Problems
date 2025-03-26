@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Gallery</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #1a1a1a;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 10px;
+        max-width: 800px;
+        width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="gallery">
+        <div class="left-section">
+          <div class="grid-3x3">
+            <img src="https://picsum.photos/200" alt="img1" />
+            <img src="https://picsum.photos/201" alt="Placeholder" />
+            <img src="https://picsum.photos/202" alt="Placeholder" />
+            <img src="https://picsum.photos/203" alt="Placeholder" />
+            <img src="https://picsum.photos/204" alt="Placeholder" />
+            <img src="https://picsum.photos/205" alt="Placeholder" />
+          </div>
+          <div class="middle-row">
+            <img src="https://picsum.photos/220" alt="Placeholder" />
+            <img src="https://picsum.photos/221" alt="Placeholder" />
+            <img src="https://picsum.photos/222" alt="Placeholder" />
+          </div>
+          <div class="grid-3x3">
+            <img src="https://picsum.photos/206" alt="Placeholder" />
+            <img src="https://picsum.photos/207" alt="Placeholder" />
+            <img src="https://picsum.photos/208" alt="Placeholder" />
+            <img src="https://picsum.photos/209" alt="Placeholder" />
+            <img src="https://picsum.photos/210" alt="Placeholder" />
+            <img src="https://picsum.photos/211" alt="Placeholder" />
+          </div>
+        </div>
+        <div class="right-section">
+          <img src="https://picsum.photos/212" alt="Placeholder" />
+          <img src="https://picsum.photos/213" alt="Placeholder" />
+          <img src="https://picsum.photos/200" alt="Placeholder" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
