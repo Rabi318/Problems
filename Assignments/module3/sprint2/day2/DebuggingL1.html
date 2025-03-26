@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fix Layout</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* This ensure padding and border are included in width/height*/
+      }
+
+      .container {
+        display: flex; /*Align the boxes in  a row*/
+        justify-content: space-between; /*Space between the boxes*/
+        padding: 10px;
+        flex-wrap: wrap; /*Wrap the boxes if they don't fit in the container*/
+      }
+
+      .box {
+        width: 30%; /*30% of the container width*/
+        height: 100px;
+        background: lightblue;
+        border: 1px solid black;
+        text-align: center; /*Center the text inside the box*/
+        line-height: 100px; /*Vertically center the text*/
+        margin-bottom: 20px;
+      }
+
+      .text {
+        position: fixed;
+        left: 50%;
+        padding: 10px;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Debugging Task</h1>
+    <div class="container">
+      <div class="box">Box 1</div>
+      <div class="box">Box 2</div>
+      <div class="box">Box 3</div>
+    </div>
+    <p class="text">Fix my position!</p>
+  </body>
+</html>
