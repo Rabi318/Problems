@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .flex-container {
+        display: flex; /*Active flexbox layout*/
+        justify-content: center; /*Center the items horizontally*/
+        align-items: center; /*Center items vetically*/
+        gap: 20px; /*Space betwwn items*/
+        background-color: bisque;
+        padding: 20px;
+      }
+      div.flex-container > div {
+        background-color: brown;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        color: white;
+        padding: 20px;
+      }
+      .flex-container {
+        flex-direction: column; /* items vertically in a column*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+      <div>Item 4</div>
+    </div>
+  </body>
+</html>
