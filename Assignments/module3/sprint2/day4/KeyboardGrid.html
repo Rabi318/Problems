@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid Keyboard</title>
+    <style>
+      .keyboard-container {
+        background-color: #222;
+        padding: 20px;
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: repeat(13, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 8px;
+        width: 90%;
+        max-width: 800px;
+        margin: 50px auto;
+      }
+
+      .key {
+        background-color: #444;
+        color: #eee;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        font-size: 1em;
+        user-select: none;
+      }
+
+      .key-tab {
+        grid-column: span 1.5;
+      }
+
+      .key-caps {
+        grid-column: span 1.7;
+      }
+
+      .key-shift-left {
+        grid-column: span 2;
+      }
+
+      .key-enter {
+        grid-column: span 1.8;
+        grid-row: span 1;
+      }
+
+      .key-space {
+        grid-column: span 4;
+      }
+
+      .key-delete {
+        grid-column: span 1.5;
+      }
+
+      .key-arrow {
+        background-color: #444;
+        color: #eee;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        font-size: 1em;
+        user-select: none;
+      }
+
+      .row-5 {
+        grid-row-start: 5;
+      }
+
+      .row-5-arrows {
+        grid-column: 12 / span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .row-5-arrows .key-arrow:first-child {
+        grid-column: 1;
+      }
+
+      .row-5-arrows .key-arrow:last-child {
+        grid-column: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="keyboard-container">
+      <div class="key">`</div>
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+      <div class="key">0</div>
+      <div class="key">-</div>
+      <div class="key key-delete">Delete</div>
+
+      <div class="key key-tab">tab</div>
+      <div class="key">Q</div>
+      <div class="key">W</div>
+      <div class="key">E</div>
+      <div class="key">R</div>
+      <div class="key">T</div>
+      <div class="key">Y</div>
+      <div class="key">U</div>
+      <div class="key">I</div>
+      <div class="key">O</div>
+      <div class="key">P</div>
+      <div class="key">[</div>
+      <div class="key">\</div>
+
+      <div class="key key-caps">caps</div>
+      <div class="key">A</div>
+      <div class="key">S</div>
+      <div class="key">D</div>
+      <div class="key">F</div>
+      <div class="key">G</div>
+      <div class="key">H</div>
+      <div class="key">J</div>
+      <div class="key">K</div>
+      <div class="key">L</div>
+      <div class="key">;</div>
+      <div class="key">'</div>
+      <div class="key key-enter">Enter</div>
+
+      <div class="key key-shift-left">shift</div>
+      <div class="key">Z</div>
+      <div class="key">X</div>
+      <div class="key">C</div>
+      <div class="key">V</div>
+      <div class="key">B</div>
+      <div class="key">N</div>
+      <div class="key">M</div>
+      <div class="key">,</div>
+      <div class="key">.</div>
+      <div class="key">/</div>
+      <div class="key key-shift-right">shift</div>
+      <div class="key key-arrow">&uarr;</div>
+
+      <div class="key">fn</div>
+      <div class="key">control</div>
+      <div class="key">option</div>
+      <div class="key">alt</div>
+      <div class="key key-space">space</div>
+      <div class="key">alt</div>
+      <div class="key">option</div>
+      <div class="row-5-arrows">
+        <div class="key key-arrow">&larr;</div>
+        <div class="key key-arrow">&rarr;</div>
+      </div>
+    </div>
+  </body>
+</html>
