@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      .container {
+        width: 300px;
+        margin: auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr) 1fr;
+        gap: 5px;
+        text-align: center;
+      }
+      .exp {
+        width: 250px;
+        height: 40vh;
+        padding: 20px;
+        border: 2px solid rgb(232, 229, 229);
+        margin-top: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr) 1fr;
+        gap: 5px;
+        text-align: center;
+        margin: auto;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      .exp div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* border: #ccc solid 1px; */
+        border-radius: 5px;
+
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      }
+      .exp div:nth-child(1) {
+        grid-column: span 4;
+        border-radius: 5px;
+      }
+      h2 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 30px;
+        color: rgb(8, 118, 82);
+      }
+      .symbol {
+        background-color: black;
+        color: white;
+      }
+      .symbol:hover {
+        background-color: #333;
+        color: #fff;
+      }
+      .clear {
+        background-color: #dc3545;
+        color: #fff;
+      }
+      .clear:hover {
+        background-color: #c82333;
+      }
+      .btn:hover {
+        cursor: pointer;
+        background-color: rgb(179, 175, 175);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>Masai Calculator</h2>
+      <div class="exp">
+        <div></div>
+        <div class="btn">1</div>
+        <div class="btn">2</div>
+        <div class="btn">3</div>
+        <div class="symbol">+</div>
+        <div class="btn">4</div>
+        <div class="btn">5</div>
+        <div class="btn">6</div>
+        <div class="symbol">-</div>
+        <div class="btn">7</div>
+        <div class="btn">8</div>
+        <div class="btn">9</div>
+        <div class="symbol">x</div>
+        <div class="clear">C</div>
+        <div class="btn">0</div>
+        <div class="symbol">=</div>
+        <div class="symbol">/</div>
+      </div>
+    </div>
+  </body>
+</html>
