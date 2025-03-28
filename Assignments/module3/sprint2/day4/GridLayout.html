@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 500px;
+        height: 50vh;
+        background-color: blueviolet;
+        display: grid;
+        gap: 10px;
+        padding: 10px;
+        grid-template-areas:
+          "q1 q1 q2"
+          "q3 q4 q2";
+      }
+      .container > div {
+        border: 3px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+      }
+      .container > div:nth-of-type(1) {
+        grid-area: q1;
+        background-color: red;
+      }
+      .container > div:nth-of-type(2) {
+        grid-area: q2;
+        background-color: #fbc6cc;
+      }
+      .container > div:nth-of-type(3) {
+        grid-area: q3;
+        background-color: blue;
+      }
+      .container > div:nth-of-type(4) {
+        grid-area: q4;
+        background-color: #a03d2d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>4</div>
+      <div>6</div>
+      <div>1</div>
+      <div>5</div>
+    </div>
+  </body>
+</html>
