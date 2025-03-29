@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Layout</title>
+    <style>
+      .container {
+        width: 90%;
+        height: auto;
+        margin: auto;
+        display: grid;
+        /* border: 2px solid red; */
+        grid-template-columns: repeat(1, 1fr);
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media screen and (min-width: 1024px) {
+        .container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media screen and (min-width: 600px) and (max-width: 1023px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .card {
+        /* border: 2px solid green; */
+        width: 60%;
+        height: auto;
+        margin: auto;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        margin-top: 10px;
+      }
+      .card img {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+      }
+      button {
+        background-color: #4598e1;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: rgb(34, 34, 237);
+        cursor: pointer;
+      }
+      .info-card {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <img
+          src="https://img.freepik.com/premium-photo/portrait-smile-man-with-positive-confidence-carefree-against-grey-studio-background-face-male-person-human-with-cheerful-attitude-freedom-model-with-joy-canada-relax_590464-177008.jpg?semt=ais_hybrid"
+          alt="img"
+        />
+        <div class="info-card">
+          <h3 class="name">Vijay Shekhar Sharma</h3>
+          <h4 class="role">CEO, Paytm</h4>
+          <button>Read More</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://img.freepik.com/premium-photo/portrait-smile-man-with-positive-confidence-carefree-against-grey-studio-background-face-male-person-human-with-cheerful-attitude-freedom-model-with-joy-canada-relax_590464-177008.jpg?semt=ais_hybrid"
+          alt="img"
+        />
+        <div class="info-card">
+          <h3 class="name">Vijay Shekhar Sharma</h3>
+          <h4 class="role">CEO, Paytm</h4>
+          <button>Read More</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://img.freepik.com/premium-photo/portrait-smile-man-with-positive-confidence-carefree-against-grey-studio-background-face-male-person-human-with-cheerful-attitude-freedom-model-with-joy-canada-relax_590464-177008.jpg?semt=ais_hybrid"
+          alt="img"
+        />
+        <div class="info-card">
+          <h3 class="name">Vijay Shekhar Sharma</h3>
+          <h4 class="role">CEO, Paytm</h4>
+          <button>Read More</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://img.freepik.com/premium-photo/portrait-smile-man-with-positive-confidence-carefree-against-grey-studio-background-face-male-person-human-with-cheerful-attitude-freedom-model-with-joy-canada-relax_590464-177008.jpg?semt=ais_hybrid"
+          alt="img"
+        />
+        <div class="info-card">
+          <h3 class="name">Vijay Shekhar Sharma</h3>
+          <h4 class="role">CEO, Paytm</h4>
+          <button>Read More</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://img.freepik.com/premium-photo/portrait-smile-man-with-positive-confidence-carefree-against-grey-studio-background-face-male-person-human-with-cheerful-attitude-freedom-model-with-joy-canada-relax_590464-177008.jpg?semt=ais_hybrid"
+          alt="img"
+        />
+        <div class="info-card">
+          <h3 class="name">Vijay Shekhar Sharma</h3>
+          <h4 class="role">CEO, Paytm</h4>
+          <button>Read More</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://img.freepik.com/premium-photo/portrait-smile-man-with-positive-confidence-carefree-against-grey-studio-background-face-male-person-human-with-cheerful-attitude-freedom-model-with-joy-canada-relax_590464-177008.jpg?semt=ais_hybrid"
+          alt="img"
+        />
+        <div class="info-card">
+          <h3 class="name">Vijay Shekhar Sharma</h3>
+          <h4 class="role">CEO, Paytm</h4>
+          <button>Read More</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
