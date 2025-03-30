@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=change_history" />
+    <style>
+      
+      *{
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background-color: black; */
+        color:white
+        
+      }
+      body{
+        background-color: black;
+      }
+      .container{
+        width: 90%;
+        margin: auto;
+        height: 100vh;
+      }
+      .navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo{
+        font-size: 25px;
+        font-weight: bold;
+      }
+      .nav-left{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .nav-links{
+        list-style: none;
+        display: flex;
+        gap: 26px;
+      }
+      .nav-links a{
+        text-decoration: none;
+        font-size: 17px;
+        color:gray
+      }
+      .nav-links a:hover{
+        background-color: gray;
+        border-radius: 7px;
+        padding: 5px 5px;
+        color:white
+        
+      }
+      header{
+        /* border: 2px solid red; */
+        margin: 8px 0;
+        padding: 12px;
+      }
+      .nav-btn{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        
+      }
+      .nav-btn a{
+        text-decoration: none;
+        font-size: 17px;
+
+      }
+      .nav-btn a:hover{
+        background-color: gray;
+      }
+      .login{
+        border: 2px solid gray;
+        padding: 5px 7px;
+        border-radius: 5px;
+      }
+      .contact{
+        border: 2px solid gray;
+        padding: 5px 7px;
+        border-radius: 5px;
+      }
+      .signup{
+        
+        padding: 5px 7px;
+        border-radius: 5px;
+        background-color: white;
+        color:black;
+      }
+      .first-sec{
+        border: 2px solid gray;
+        margin : 7% 0;
+        width: 85%;
+        height: 70vh;
+        text-align: center;
+        /* margin: auto; */
+        padding: 6%;
+       background: linear-gradient(to top, #03635f, #983909,black);
+      
+      }
+      h1{
+        font-size: 50px;
+        font-weight: bold;
+      }
+      h4{
+        margin: 20px 0;
+        font-size: 20px;
+        color: gray;
+        line-break: 25px;
+      }
+     .start{
+      background-color: white;
+      color: black;
+      padding: 15px;
+      font-size: 17px;
+      border-radius: 15px;
+      border: none;
+     }
+     .demo{
+      background-color: black;
+      color: white;
+      padding: 15px;
+      font-size: 17px;
+      border-radius: 15px;
+      border: none;
+     }
+     .material-symbols-outlined{
+      margin: 20px;
+      font-size: 300px;
+     }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <header class=>
+      <nav class="navbar ">
+        <div class="nav-left">
+          <div class="logo">Vercel</div>
+          <div>
+            <ul class="nav-links">
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Solutions</a></li>
+              <li><a href="#">Resources</a></li>
+              <li><a href="#">Enterprise</a></li>
+              <li><a href="#">Docs</a></li>
+              <li><a href="#">Pricing</a></li>
+            </ul>
+          </div>
+        </div>
+          <div class="nav-btn">
+            <a href="#" class="login"> Login</a>
+            <a href="#" class="contact">contact</a>
+            <a href="#" class="signup">Sign Up</a>
+          </div>
+      </nav>
+    </header>
+    <main class="container">
+      <section class="first-sec">
+          <h1>Your complete platfrom for the web.</h1>
+          <h4>Vercel provides the developer tools and cloud infrastructure to build, scale, and secure a faster, more personalized web.</h4>
+          <div class="first-sec-btn">
+            <button class="start"> Start Deploying</button>
+            <button class="demo">Get a Demo</button>
+          </div>
+          <span class="material-symbols-outlined">
+            change_history
+            </span>
+      </section>
+    </main>
+  </div>
+  </body>
+</html>
