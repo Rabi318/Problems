@@ -130,6 +130,29 @@
       margin: 20px;
       font-size: 300px;
      }
+     footer{
+      width: 85%;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      grid-template-columns: repeat(4,1fr);
+     }
+     footer h4{
+      font-size: 15px;
+      color: white;
+     }
+     footer div{
+      text-align: center;
+     }
+     footer div a{
+      text-decoration: none;
+      color: gray;
+      font-size: 12px;
+     }
+.product, .resources, .company, .socials{
+  display: grid;
+  grid-template-rows: repeat(9,1fr);
+}
     </style>
   </head>
   <body>
@@ -169,6 +192,43 @@
             </span>
       </section>
     </main>
+    <footer>
+      <div class="product">
+        <h4>Products</h4>
+        <a href="#">AI</a>
+        <a href="#">Enterprise</a><a href="#">Fluid Compute</a><a href="#">Next.js</a><a href="#">Observability</a><a href="#">Previews</a><a href="#">Rendering</a><a href="#">Security</a><a href="#">turbo</a>
+      </div>
+      <div class="resources">
+        <h4>Resources</h4>
+        <a href="#">community</a>
+        <a href="#">Docs</a>
+        <a href="#">Guides</a>
+        <a href="#">Integrations</a>
+        <a href="#">Pricing</a>
+        <a href="#">Resources</a>
+        <a href="#">Solution Partners</a>
+        <a href="#">Templates</a>
+      </div>
+      <div class="company">
+        <h4>Company</h4>
+       <a href="">About</a> 
+       <a href="">Blog</a> 
+       <a href="">Careers</a> 
+       <a href="">Changelog</a> 
+       <a href="">Contact Us</a> 
+       <a href="">Customers</a> 
+       <a href="">Partners</a> 
+       <a href="">Privacy Policy</a>
+
+      </div>
+      <div class="socials">
+        <h4>Socials</h4>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Youtube</a>
+        <a href="#"> Twitter</a>
+      </div>
+    </footer>
   </div>
   </body>
 </html>
