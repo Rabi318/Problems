@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="color">Enter color Name:</label>
+    <input type="text" id="color" placeholder="red, blue, grren.." />
+    <br /><br />
+    <label for="text">Enter Text:</label>
+    <input type="text" id="text" placeholder="Type Text here.." />
+    <br /><br />
+    <button id="bg-btn">Change BackGround</button>
+    <button id="text-btn">Update Text</button>
+
+    <div class="content-box">This is a the Demo Text</div>
+
+    <script>
+      let colorInput = document.getElementById("color");
+      let textInput = document.getElementById("text");
+      let bgBtn = document.getElementById("bg-btn");
+      let textBtn = document.getElementById("text-btn");
+      let contentBox = document.querySelector(".content-box");
+
+      bgBtn.addEventListener("click", () => {
+        let color = colorInput.value.trim();
+        if (color !== "") {
+          contentBox.style.backgroundColor = color;
+        } else {
+          alert("Invalid color name");
+        }
+      });
+      textBtn.addEventListener("click", () => {
+        let text = textInput.value.trim();
+        if (text !== "") {
+          contentBox.innerText = text;
+        } else {
+          alert("Please eneter some text");
+        }
+      });
+    </script>
+  </body>
+</html>
