@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Understanding DOM</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="h1">H1 tag</h1>
+    </div>
+    <p>Para 1</p>
+    <p>Para 2</p>
+    <p>Para 3</p>
+    <p>Para 4</p>
+
+    <script>
+      let h1 = document.getElementById("h1");
+      h1.innerText = "Welcome to the DOM World!";
+      document.querySelectorAll("p").forEach((ele, idx) => {
+        ele.style.color = "blue";
+      });
+      document.querySelector(".container").style.backgroundColor = "yellow";
+    </script>
+  </body>
+</html>
