@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="add-btn">Add Item</button>
+    <ul id="list-item">
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+
+    <script>
+      const ul = document.querySelector("#list-item");
+      const addBtn = document.querySelector("#add-btn");
+
+      addBtn.addEventListener("click", () => {
+        const li = document.createElement("li");
+        li.innerText = "New Item";
+        const lists = ul.querySelectorAll("li");
+        // console.log(lists.length);
+        if (lists.length % 2 === 0) {
+          li.style.fontStyle = "italic";
+          li.style.color = "red";
+        } else {
+          li.style.fontWeight = "bold";
+          li.style.color = "blue";
+        }
+        ul.appendChild(li);
+      });
+    </script>
+  </body>
+</html>
