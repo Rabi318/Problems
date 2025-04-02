@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <ul id="list">
+        <li id="item1">Item 1</li>
+        <li id="item2">Item 2</li>
+        <li id="item3">Item 3</li>
+      </ul>
+    </div>
+
+    <script>
+      const itme2 = document.getElementById("item2");
+      itme2.addEventListener("click", () => {
+        let parent = itme2.parentNode;
+        alert("Parent text content: " + parent.textContent);
+
+        let prevSib = itme2.previousElementSibling;
+        let nextSib = itme2.nextElementSibling;
+
+        if (prevSib) {
+          console.log("Previous sibling:", prevSib.textContent);
+        }
+
+        if (nextSib) {
+          console.log("Next sibling:", nextSib.textContent);
+        }
+      });
+    </script>
+  </body>
+</html>
