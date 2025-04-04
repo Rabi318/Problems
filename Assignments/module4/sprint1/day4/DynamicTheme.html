@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="loadTheme()">
+    <label for="theme-selector">Select Theme:</label>
+    <select name="" id="theme-selector">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="blue">Blue</option>
+    </select>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
+      laborum, animi consequatur magni aliquam quaerat ullam, at perspiciatis
+      dignissimos illo dolorem possimus suscipit.
+    </p>
+    <script>
+      function setTheme(theme) {
+        if (theme === "dark") {
+          document.body.style.backgroundColor = "black";
+          document.body.style.color = "white";
+        } else if (theme === "blue") {
+          document.body.style.backgroundColor = "blue";
+          document.body.style.color = "white";
+        } else {
+          document.body.style.backgroundColor = "white";
+          document.body.style.color = "black";
+        }
+      }
+
+      function loadTheme() {
+        const savedTheme = sessionStorage.getItem("theme");
+        if (savedTheme) {
+          setTheme(savedTheme);
+          document.getElementById("theme-selector").value = savedTheme;
+        } else {
+          setTheme("light");
+        }
+      }
+      document
+        .getElementById("theme-selector")
+        .addEventListener("change", (e) => {
+          let selectedTheme = e.target.value;
+          sessionStorage.setItem("theme", selectedTheme);
+          setTheme(selectedTheme);
+        });
+    </script>
+  </body>
+</html>
