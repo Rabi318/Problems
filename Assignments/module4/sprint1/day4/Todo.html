@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      input,
+      button {
+        padding: 10px;
+        margin: 5px;
+      }
+      #task-list {
+        list-style-type: none;
+        padding: 0;
+      }
+      .task {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Todo List</h2>
+    <input type="text" id="task-input" />
+    <button id="add-btn">Add Task</button>
+    <input type="text" id="search-bar" placeholder="Search tasks" />
+    <ul id="task-list"></ul>
+
+    <script>
+      let taskInput = document.getElementById("task-input");
+      let addTaskBtn = document.getElementById("add-btn");
+      let searchBar = document.getElementById("search-bar");
+      let taskList = document.getElementById("task-list");
+
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      function displayTasks(filteredTasks = tasks) {
+        taskList.innerHTML = "";
+        filteredTasks.forEach((task) => {
+          let li = document.createElement("li");
+          li.className = "task";
+          li.dataset.id = task.id;
+          const taskText = document.createElement("sapn");
+          taskText.innerText = task.text;
+          if (task.completed) {
+            taskText.style.textDecoration = "line-through";
+            taskText.style.color = "gray";
+          }
+          const actions = document.createElement("div");
+          const completeBtn = document.createElement("button");
+          completeBtn.textContent = task.completed ? "Undo" : "Complete";
+          completeBtn.onclick = () => {
+            toggleTaskCompletion(task.id);
+          };
+          const removeBtn = document.createElement("button");
+          removeBtn.textContent = "Remove";
+          removeBtn.onclick = () => removeTask(task.id);
+          actions.append(completeBtn, removeBtn);
+          li.append(taskText, actions);
+          taskList.appendChild(li);
+        });
+      }
+      function addTask() {
+        const taskText = taskInput.value;
+        if (taskText === "") {
+          alert("Please enter a task");
+        }
+        let newTask = {
+          id: Date.now(),
+          text: taskText,
+          completed: false,
+        };
+        tasks.push(newTask);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        taskInput.value = "";
+        displayTasks();
+      }
+      function toggleTaskCompletion(id) {
+        let task = tasks.find((task) => task.id === id);
+        if (task) {
+          task.completed = !task.completed;
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          displayTasks();
+        }
+      }
+      function removeTask(id) {
+        tasks = tasks.filter((task) => task.id !== id);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        displayTasks();
+      }
+      function filterTasks() {
+        let query = searchBar.value.toLowerCase();
+        let filteredTasks = tasks.filter((task) =>
+          task.text.toLowerCase().includes(query)
+        );
+        displayTasks(filteredTasks);
+      }
+      addTaskBtn.addEventListener("click", addTask);
+      searchBar.addEventListener("input", filterTasks);
+      displayTasks();
+    </script>
+  </body>
+</html>
