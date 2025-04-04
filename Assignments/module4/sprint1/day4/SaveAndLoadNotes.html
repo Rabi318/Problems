@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="displayNotes()">
+    <input type="text" id="input" />
+    <button onclick="addNote()">Add Notes</button>
+    <button onclick="clearNotes()">Clear Notes</button>
+    <div id="noteList"></div>
+
+    <script>
+      function addNote() {
+        let input = document.getElementById("input");
+        let notes = JSON.parse(localStorage.getItem("notes")) || [];
+        notes.push(input.value);
+        localStorage.setItem("notes", JSON.stringify(notes));
+        input.value = "";
+        displayNotes();
+      }
+      function displayNotes() {
+        let notes = JSON.parse(localStorage.getItem("notes"));
+        let noteList = document.getElementById("noteList");
+        noteList.innerHTML = "";
+        notes.forEach((element) => {
+          let li = document.createElement("li");
+          li.innerText = element;
+          noteList.appendChild(li);
+        });
+      }
+      function clearNotes() {
+        localStorage.removeItem("notes");
+        displayNotes();
+      }
+    </script>
+  </body>
+</html>
