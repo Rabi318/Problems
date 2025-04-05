@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="weatherForm">
+      <label for="city">Enter City Name:</label>
+      <input type="text" id="city" placeholder="City name" />
+      <button type="submit">Get Weather</button>
+    </form>
+    <p id="error-msg" style="display: none"></p>
+    <div id="weather"></div>
+    <script>
+      const weatherForm = document.getElementById("weatherForm");
+      const cityInput = document.getElementById("city");
+      const weatherDisplay = document.getElementById("weather");
+      const errorMsg = document.getElementById("error-msg");
+      const apikey = "84ebee74a6207b89944128224686c334"; //This api key is inactive now
+      weatherForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const city = cityInput.value;
+        if (city == "") return alert("Please enter a city name!");
+        fetchWeather(city);
+      });
+
+      async function fetchWeather(city) {
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city},uk&APPID=${apikey}`;
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          display(data, city);
+        } catch (error) {
+          console.log(error);
+          errorMsg.style.display = "block";
+          errorMsg.textContent =
+            "Failed to fetch weather. Please try again later.";
+          errorMsg.style.color = "red";
+        }
+      }
+      function display(data, city) {
+        let temp = data.main.temp;
+        const desc = data.weather[0].description;
+        weatherDisplay.innerHTML = `<h2>Weather in ${city}</h2>
+    <p>Temperature: ${temp}°C</p>
+    <p>Description: ${desc}</p>`;
+      }
+    </script>
+  </body>
+</html>
