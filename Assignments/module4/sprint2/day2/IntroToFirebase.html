@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      table {
+        width: 80%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>User List</h2>
+    <div id="msg" class="msg"></div>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody"></tbody>
+    </table>
+
+    <script>
+      const baseURL =
+        "https://userdb-67b43-default-rtdb.asia-southeast1.firebasedatabase.app/users.json";
+      async function fetchUsers() {
+        const userTableBody = document.getElementById("userTableBody");
+        const errorMessage = document.getElementById("msg");
+        try {
+          const res = await fetch(baseURL);
+          if (!res.ok) {
+            errorMessage.textContent = "Error fetching data from firebase";
+          }
+          const users = await res.json();
+          let userArray = Object.entries(users).map(([id, user]) => ({
+            id,
+            ...user,
+          }));
+          // console.log(userArray);
+          userArray.forEach((user) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${user.name}</td><td>${user.email}</td>`;
+            userTableBody.appendChild(row);
+          });
+        } catch (error) {
+          errorMessage.textContent =
+            "Error fetching user data: " + error.message;
+        }
+      }
+      fetchUsers();
+    </script>
+  </body>
+</html>
