@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .filters {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .filters label {
+        margin-right: 10px;
+      }
+      .filters select,
+      .filters input {
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      #search-btn {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      #search-btn:hover {
+        background-color: #0056d3;
+      }
+      .hidden {
+        display: none;
+      }
+      #loadingMsg,
+      #errorMsg {
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c5cb;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Product Search</h2>
+      <div class="filters">
+        <label for="category">Category:</label>
+        <select name="" id="category">
+          <option value="electronics">Electronics</option>
+          <option value="clothing">clothing</option>
+          <option value="books">Books</option>
+        </select>
+        <label for="minPrice">Min Price:</label>
+        <input type="number" id="minPrice" placeholder="500" />
+        <label for="maxPrice">Max Price:</label>
+        <input type="number" id="maxPrice" placeholder="5000" />
+        <button onclick="fetchProducts()" id="search-btn">Search</button>
+      </div>
+      <div id="loadingMsg" class="hidden">Loading</div>
+      <div id="errorMsg" class="hidden">Failed to fetch Product.</div>
+      <div id="productGrid" class="product-grid"></div>
+    </div>
+
+    <script>
+      async function fetchProducts() {
+        const category = document.getElementById("category").value;
+        const minPrice = document.getElementById("minPrice").value || 0;
+        const maxPrice = document.getElementById("maxPrice").value || 10000;
+        const apiUrl = `https://mockapi.io/products?category=${category}&min_price=${minPrice}&max_price=${maxPrice}&sort=asc`;
+        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+        document.getElementById("loadingMsg").style.display = "block";
+
+        document.getElementById("errorMsg").style.display = "none";
+        document.getElementById("productGrid").innerHtml = "";
+        try {
+          const res = await fetch(proxyUrl + apiUrl);
+          console.log(res);
+          const products = await res.json();
+          document.getElementById("loadingMsg").style.display = "none";
+          if (products.length === 0) {
+            document.getElementById("errorMsg").style.display = "block";
+            return;
+          }
+          const productGrid = document.getElementById("productGrid");
+          products.forEach((product) => {
+            const productItem = document.createElement("div");
+
+            productItem.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price}</p>
+            `;
+            productGrid.appendChild(productItem);
+          });
+        } catch (error) {
+          document.getElementById("loadingMsg").style.display = "none";
+          document.getElementById("errorMsg").style.display = "block";
+          console.error("Error fetching products:", error);
+        }
+      }
+    </script>
+  </body>
+</html>
