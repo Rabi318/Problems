@@ -1,0 +1,34 @@
+{
+  "movies": {
+    "movie1": {
+      "genre": "Action",
+      "image": "https://example.com/images/movie1.jpg",
+      "title": "Mad Max: Fury Road",
+      "year": 2015
+    },
+    "movie2": {
+      "genre": "Comedy",
+      "image": "https://example.com/images/movie2.jpg",
+      "title": "The Grand Budapest Hotel",
+      "year": 2014
+    },
+    "movie3": {
+      "genre": "Drama",
+      "image": "https://example.com/images/movie3.jpg",
+      "title": "The Shawshank Redemption",
+      "year": 1994
+    },
+    "movie4": {
+      "genre": "Sci-Fi",
+      "image": "https://example.com/images/movie4.jpg",
+      "title": "Inception",
+      "year": 2010
+    },
+    "movie5": {
+      "genre": "Romance",
+      "image": "https://example.com/images/movie5.jpg",
+      "title": "La La Land",
+      "year": 2016
+    }
+  }
+}

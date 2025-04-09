@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let url =
+        "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json";
+
+      async function fetchMovies() {
+        let res = await fetch(
+          "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json"
+        );
+        let movies = await res.json();
+
+        //Method-1(Converting the object of object data into array of objects)
+        // let moviesArray = Object.entries(movies);
+        // let finalData = moviesArray.map(([id, movie]) => ({ id, ...movie }));
+        // console.log(finalData);
+
+        //Method-2
+        let newArray = [];
+        for (let key in movies) {
+          newArray.push({ id: key, ...movies[key] });
+        }
+        console.log(newArray);
+      }
+      fetchMovies();
+    </script>
+  </body>
+</html>
