@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      #editForm {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>User List</h2>
+    <table id="usetTable" border="1" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="editForm">
+      <h3>Edit User</h3>
+      <input type="text" id="editName" placeholder="Name" required />
+      <input type="email" id="editEmail" placeholder="Email" required />
+      <button onclick="submitEdit()">Save</button>
+      <button
+        onclick="document.getElementById('editForm').style.display='none'"
+      >
+        Cancel
+      </button>
+    </div>
+
+    <script>
+      const baseURL =
+        "https://userdb-67b43-default-rtdb.asia-southeast1.firebasedatabase.app/users";
+      let currentEditUserId = null;
+      async function fetchUsers() {
+        try {
+          const res = await fetch(`${baseURL}.json`);
+          const data = await res.json();
+          const userArray = Object.entries(data).map(([id, user]) => ({
+            id,
+            ...user,
+          }));
+          console.log(userArray);
+          const tbody = document.querySelector("#usetTable tbody");
+          tbody.innerHTML = "";
+          userArray.forEach((user) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td><button onclick="openEditForm('${user.id}', '${user.name}', '${user.email}')">Edit</button>
+            <button onclick="deleteUser('${user.id}')">Delete</button></td>
+          `;
+            tbody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error fetching users:", error);
+        }
+      }
+      function openEditForm(id, name, email) {
+        currentEditUserId = id;
+        document.getElementById("editName").value = name;
+        document.getElementById("editEmail").value = email;
+        document.getElementById("editForm").style.display = "block";
+      }
+      async function submitEdit() {
+        const name = document.getElementById("editName").value;
+        const email = document.getElementById("editEmail").value;
+        if (!name || !email) {
+          alert("Name and email required.");
+          return;
+        }
+        const updateUser = { name: name, email: email };
+        try {
+          const res = await fetch(`${baseURL}/${currentEditUserId}.json`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateUser),
+          });
+          if (!res.ok) {
+            console.log("Error updating user");
+          }
+          fetchUsers();
+          document.getElementById("editForm").style.display = "none";
+        } catch (error) {
+          console.error("Error updating user:", error);
+        }
+      }
+      async function deleteUser(key) {
+        try {
+          const res = await fetch(`${baseURL}/${key}.json`, {
+            method: "DELETE",
+          });
+          if (!res.ok) {
+            console.log("Error deleting user");
+          }
+          fetchUsers();
+        } catch (error) {
+          console.error("Error deleting user:", error);
+        }
+      }
+      fetchUsers();
+    </script>
+  </body>
+</html>
