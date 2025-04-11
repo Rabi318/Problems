@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .todo-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 300px;
+        box-sizing: border-box;
+        margin-top: 10px;
+      }
+      .todo-item input[type="checkbox"] {
+        margin-right: 10px;
+      }
+      .pagination {
+        margin-top: 20px;
+      }
+      .pagination button {
+        margin: 0 5px;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .pagination button.active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+      #fetch-button {
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        background-color: white;
+        color: #007bff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="fetch-btn">Fetch Todos</button>
+    <div id="todos-container"></div>
+    <div id="pagination" class="pagination"></div>
+
+    <script>
+      const fetchBtn = document.getElementById("fetch-btn");
+      const todosContainer = document.getElementById("todos-container");
+      const pagination = document.getElementById("pagination");
+      let todosPerPage = 10;
+      let currentPage = 1;
+      let allTodos = [];
+      async function fetchDodos() {
+        try {
+          const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+          allTodos = await res.json();
+          displayTodos(currentPage);
+          createPaginationButtons();
+        } catch (error) {
+          todosContainer.innerHTML = `<h2>Error fetching </h2>`;
+        }
+      }
+      function displayTodos(page) {
+        todosContainer.innerHTML = "";
+        const start = (page - 1) * todosPerPage;
+        const end = start + todosPerPage;
+        const paginatedTodos = allTodos.slice(start, end);
+
+        paginatedTodos.forEach((todo) => {
+          const todoDiv = document.createElement("div");
+          todoDiv.classList.add("todo-item");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = todo.completed;
+          todoDiv.appendChild(checkbox);
+          const textSpan = document.createElement("span");
+          textSpan.textContent = todo.title;
+          todoDiv.appendChild(textSpan);
+          todosContainer.appendChild(todoDiv);
+        });
+        updateActiveButton();
+      }
+      function createPaginationButtons() {
+        pagination.innerHTML = "";
+        const totalPages = Math.ceil(allTodos.length / todosPerPage);
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.textContent = i;
+          button.classList.add("page-button");
+          button.addEventListener("click", () => {
+            currentPage = i;
+            displayTodos(currentPage);
+          });
+          pagination.appendChild(button);
+        }
+        updateActiveButton();
+      }
+      function updateActiveButton() {
+        const buttons = document.querySelectorAll(".pagination button");
+        buttons.forEach((button) => {
+          if (parseInt(button.textContent) === currentPage) {
+            button.classList.add("active");
+          } else {
+            button.classList.remove("active");
+          }
+        });
+      }
+      fetchBtn.addEventListener("click", fetchDodos);
+      fetchDodos();
+    </script>
+  </body>
+</html>
