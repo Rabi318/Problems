@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LMS</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Libraray Management System</h1>
+    <section id="books-section">
+      <h2>Books</h2>
+      <div id="book-filters">
+        <input
+          type="text"
+          name="bookTitleFilter"
+          id="bookTitleFilter"
+          placeholder="Search by title"
+        />
+        <input
+          type="text"
+          name="bookAuthorFilter"
+          id="bookAuthorFilter"
+          placeholder="Search by author"
+        />
+        <select id="bookGenreFilter">
+          <option value="">All Genres</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+          <option value="Fantasy">Fantasy</option>
+        </select>
+        <select name="" id="bookAvailableFilter">
+          <option value="">All Availability</option>
+          <option value="true">Available</option>
+          <option value="false">Unavailable</option>
+        </select>
+        <select id="bookSort">
+          <option value="title">Sort by Title</option>
+          <option value="author">Sort by Author</option>
+          <option value="publishedYear">Sort by Year</option>
+        </select>
+        <select id="bookItemsPerPage">
+          <option value="5">5 per page</option>
+          <option value="10">10 per page</option>
+        </select>
+        <button onclick="applyBookFilters()">Apply</button>
+      </div>
+      <div id="bookList"></div>
+      <button onclick="prevBookPage()">Prev</button>
+      <button onclick="nextBookPage()">Next</button>
+    </section>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

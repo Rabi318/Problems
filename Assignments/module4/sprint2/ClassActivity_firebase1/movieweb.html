@@ -44,6 +44,8 @@
     <div id="movieList"></div>
 
     <script>
+      let baseURL =
+        "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies";
       async function addMovie() {
         let movie = {
           title: document.getElementById("title").value,
