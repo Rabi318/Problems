@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Views</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">StudyNotes</div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="create.html">Create</a></li>
+          <li><a href="view.html">View</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <button id="menuToggle" class="menuToggle">&#9776;</button>
+        <!-- <button id="darkMode">Toggle</button> -->
+      </nav>
+    </header>
+    <h2>Your Study Notes</h2>
+    <input type="text" id="search" placeholder="Search notes..." />
+    <select name="" id="filterPriority">
+      <option value="all">All</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+
+    <div id="notesContainer"></div>
+
+    <footer>
+      <p>&copy; 2024 Collaborative Study Notes</p>
+    </footer>
+    <script src="Viewscript.js"></script>
+  </body>
+</html>
