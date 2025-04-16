@@ -3,15 +3,14 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 const firebaseConfig = {
-  apiKey: "AIzaSyAip-2cEuNHV3lq670l4RG8L1jZ2qyAoEM",
+  apiKey: "Your-api-key",
   authDomain: "userdb-67b43.firebaseapp.com",
-  databaseURL:
-    "https://userdb-67b43-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "userdb-67b43",
-  storageBucket: "userdb-67b43.firebasestorage.app",
-  messagingSenderId: "716340306235",
-  appId: "1:716340306235:web:f924df28dd04e9d3acd71e",
-  measurementId: "G-DQ7ND95RJF",
+  databaseURL: "Your-database-url",
+  projectId: "Your-project-id",
+  storageBucket: "Your-storage-bucket",
+  messagingSenderId: "Your-messaging-sender-id",
+  appId: "Your-app-id",
+  measurementId: "Your-measurement-id",
 };
 
 // Initialize Firebase
