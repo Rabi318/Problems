@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="height: 60000px"></body>
+
+  <script>
+    let lastScrollTime = 0;
+    window.addEventListener("scroll", () => {
+      let now = Date.now();
+      if (now - lastScrollTime >= 1000) {
+        printData();
+        lastScrollTime = now;
+      }
+    });
+    function printData() {
+      console.log("Action Perform");
+    }
+  </script>
+</html>

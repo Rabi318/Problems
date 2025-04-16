@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authentication</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Firebase Authentication</h2>
+    <!-- signup form -->
+    <div id="signup-container">
+      <h3>Sign Up</h3>
+      <input
+        type="email"
+        name=""
+        id="signup-email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        name=""
+        id="signup-password"
+        placeholder="Password"
+        required
+      />
+      <button id="signup-btn">Sign UP</button>
+      <p id="signup-msg"></p>
+    </div>
+
+    <!-- login form -->
+    <div id="login-container">
+      <h3>Login</h3>
+      <input
+        type="email"
+        name=""
+        id="login-email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        name=""
+        id="login-password"
+        placeholder="Password"
+        required
+      />
+      <button id="login-btn">Login</button>
+      <p id="login-msg"></p>
+    </div>
+    <!-- Logout -->
+    <div id="logout-container">
+      <h3>Welcome, <span id="user-email"></span></h3>
+      <button id="logout-btn">Logout</button>
+    </div>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyA9bI_q2LaDkjdYQB79NuaWUfNwSRQTAms",
+        authDomain: "auth-1b3f5.firebaseapp.com",
+        projectId: "auth-1b3f5",
+        storageBucket: "auth-1b3f5.firebasestorage.app",
+        messagingSenderId: "294716677022",
+        appId: "1:294716677022:web:a32a542c55297f29f8d48f",
+        measurementId: "G-PTBK472MFE",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+
+      // Signup
+      document.getElementById("signup-btn").addEventListener("click", () => {
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            document.getElementById("signup-msg").innerText =
+              "User Created Successfully!";
+            document.getElementById("signup-email").value = "";
+            document.getElementById("signup-password").value = "";
+          })
+          .catch((error) => {
+            document.getElementById("signup-msg").innerText = error.message;
+          });
+      });
+
+      // Login
+      document.getElementById("login-btn").addEventListener("click", () => {
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            document.getElementById("login-msg").innerText =
+              "User Logged In Successfully!";
+            document.getElementById("login-email").value = "";
+            document.getElementById("login-password").value = "";
+          })
+          .catch((error) => {
+            document.getElementById("login-msg").innerText = error.message;
+          });
+      });
+
+      // Logout
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        signOut(auth)
+          .then(() => {
+            alert("User logged out successfully!");
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      });
+
+      // Check if user is logged in
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          document.getElementById("user-email").innerText = user.email;
+          document.getElementById("signup-container").classList.add("hidden");
+          document.getElementById("login-container").classList.add("hidden");
+          document
+            .getElementById("logout-container")
+            .classList.remove("hidden");
+        } else {
+          document
+            .getElementById("signup-container")
+            .classList.remove("hidden");
+          document.getElementById("login-container").classList.remove("hidden");
+          document.getElementById("logout-container").classList.add("hidden");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authentication</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        margin: 50px;
+      }
+      input {
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        width: 250px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Firebase Authentication</h2>
+    <!-- signup form -->
+    <div id="signup-container">
+      <h3>Sign Up</h3>
+      <input
+        type="email"
+        name=""
+        id="signup-email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        name=""
+        id="signup-password"
+        placeholder="Password"
+        required
+      />
+      <select name="" id="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button id="signup-btn">Sign UP</button>
+      <p id="signup-msg"></p>
+    </div>
+
+    <!-- login form -->
+    <div id="login-container">
+      <h3>Login</h3>
+      <input
+        type="email"
+        name=""
+        id="login-email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        name=""
+        id="login-password"
+        placeholder="Password"
+        required
+      />
+      <button id="login-btn">Login</button>
+      <p id="login-msg"></p>
+    </div>
+    <!-- Dashboard -->
+    <div id="dashboard-container" class="hidden">
+      <h3>
+        Welcome, <span id="user-email">(<span id="user-role"></span>)</span>
+      </h3>
+      <button id="logout-btn">Logout</button>
+      <!-- Admin Section -->
+      <div id="admin-container">
+        <h3>Admin Actions</h3>
+        <button id="delete-users-btn">Delete All Users</button>
+      </div>
+    </div>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        deleteDoc,
+        doc,
+        setDoc,
+      } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyA9bI_q2LaDkjdYQB79NuaWUfNwSRQTAms",
+        authDomain: "auth-1b3f5.firebaseapp.com",
+        projectId: "auth-1b3f5",
+        storageBucket: "auth-1b3f5.firebasestorage.app",
+        messagingSenderId: "294716677022",
+        appId: "1:294716677022:web:a32a542c55297f29f8d48f",
+        measurementId: "G-PTBK472MFE",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      //NewSignup
+      document
+        .getElementById("signup-btn")
+        .addEventListener("click", async () => {
+          const email = document.getElementById("signup-email").value;
+          const password = document.getElementById("signup-password").value;
+          const role = document.getElementById("role").value;
+          try {
+            const userCredentials = await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            const user = userCredentials.user;
+            //save user role in firestore
+            await setDoc(doc(db, "users", user.uid), {
+              email: user.email,
+              role: role,
+            });
+            document.getElementById("signup-msg").innerText =
+              "User Created Successfully!";
+            document.getElementById("signup-email").value = "";
+            document.getElementById("signup-password").value = "";
+          } catch (error) {
+            document.getElementById("signup-msg").innerText = error.message;
+          }
+        });
+
+      // New Login
+      document
+        .getElementById("login-btn")
+        .addEventListener("click", async () => {
+          const email = document.getElementById("login-email").value;
+          const password = document.getElementById("login-password").value;
+          try {
+            const userCredentials = await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            const user = userCredentials.user;
+            document.getElementById("login-msg").innerText =
+              "User Logged In Successfully!";
+            document.getElementById("login-email").value = "";
+            document.getElementById("login-password").value = "";
+          } catch (error) {
+            document.getElementById("login-msg").innerText = error.message;
+          }
+        });
+
+      //New Logout
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async () => {
+          await signOut(auth);
+          alert("User logged out successfully!");
+        });
+
+      // New Auth State Change
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          document.getElementById("user-email").innerText = user.email;
+          //Get user role
+          const userDoc = await getDocs(doc(db, "users", user.uid));
+          if (userDoc.exists()) {
+            const role = userDoc.data().role;
+            document.getElementById("user-role").innerText = role;
+            document.getElementById("signup-container").classList.add("hidden");
+            document.getElementById("login-container").classList.add("hidden");
+            document
+              .getElementById("dashboard-container")
+              .classList.remove("hidden");
+            if (role === "admin") {
+              document
+                .getElementById("admin-container")
+                .classList.remove("hidden");
+            }
+          } else {
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

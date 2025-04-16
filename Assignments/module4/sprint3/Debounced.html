@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 20px;
+        text-align: center;
+      }
+      input {
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .movie-title {
+        margin-top: 20px;
+        padding: 5px;
+        font-size: 18px;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Debounced Movie</h2>
+    <input
+      type="text"
+      name=""
+      id="search-input"
+      placeholder="Search Movie"
+      required
+    />
+    <div id="results"></div>
+
+    <script>
+      const input = document.getElementById("search-input");
+      const resultDiv = document.getElementById("results");
+      let bouncedTimeout;
+      const apiKey = "Your-Api-key";
+      input.addEventListener("input", () => {
+        clearTimeout(bouncedTimeout);
+        bouncedTimeout = setTimeout(async () => {
+          const query = input.value;
+          if (query.length === 0) {
+            resultDiv.innerHTML = "";
+            return;
+          }
+          try {
+            const res = await fetch(
+              `http://www.omdbapi.com/?&apikey=${apiKey}&s=${query}`
+            );
+            const data = await res.json();
+            resultDiv.innerHTML = "";
+            if (data.Response === "True") {
+              data.Search.forEach((movie) => {
+                const div = document.createElement("div");
+                div.className = "movie-title";
+                div.textContent = movie.Title;
+                resultDiv.appendChild(div);
+              });
+            } else {
+              resultDiv.innerHTML = `<p>No results found.</p>`;
+            }
+          } catch (error) {
+            resultDiv.innerHTML = `<p>Something went wrong while fetching data. Please try again later.</p>`;
+            console.log(error);
+          }
+        }, 500);
+      });
+    </script>
+  </body>
+</html>

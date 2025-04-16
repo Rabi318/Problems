@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+      }
+      button {
+        background-color: lightsalmon;
+        padding: 10px 20px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: lightcoral;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button id="buy-btn">Buy</button>
+    </div>
+
+    <script>
+      document.getElementById("buy-btn").addEventListener("click", buyItme);
+
+      let canClick = true;
+      function buyItme() {
+        console.log("Button clicked!");
+        if (canClick) {
+          console.log("Item bought!");
+          canClick = false;
+          setTimeout(() => {
+            canClick = true;
+          }, 1000);
+        }
+      }
+    </script>
+  </body>
+</html>
