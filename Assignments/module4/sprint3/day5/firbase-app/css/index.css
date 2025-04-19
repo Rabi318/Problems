@@ -1,0 +1,67 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+/* body styling */
+body {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+/* container styling */
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+/* input styling */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* button styling */
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+/* error and success msg */
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+/* mobile responsive */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+  input,
+  button {
+    font-size: 14px;
+  }
+}
