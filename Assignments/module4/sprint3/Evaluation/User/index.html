@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Directory Table</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>User Directory</h2>
+    <input type="text" id="search" placeholder="search by name or email..." />
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th data-key="name">Name</th>
+          <th data-key="email">Email</th>
+          <th data-key="address.city">City</th>
+          <th data-key="company.name">Company</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="pagination" class="pagination">
+      <button id="prevBtn">Prev</button>
+      <span id="pageInfo"></span>
+      <button id="nextBtn">Next</button>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
