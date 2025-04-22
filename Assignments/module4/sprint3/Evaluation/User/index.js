@@ -45,7 +45,7 @@ function displayTable() {
   displayPagination();
 }
 function displayPagination() {
-  const totalPages = Math.ceil(fetchUsers.length / rowsPerPage);
+  const totalPages = Math.ceil(filteredUsers.length / rowsPerPage);
 
   pageInfo.textContent = `Page ${currentPage} `;
   prevBtn.disabled = currentPage === 1;
