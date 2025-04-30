@@ -1,0 +1,106 @@
+<!-- Components, Props, Vartual DOM -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Components | Props | VDom</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div id="root">Hello from dom</div>
+
+    <script type="text/babel">
+      function Welcome(props) {
+        return (
+          <h2 class="text-3xl font-bold underline">
+            Welcome {props.name} {props.age}
+          </h2>
+        );
+      }
+
+      function UserInfo({ name, age, city }) {
+        return (
+          <div>
+            <h4 class="text-xl font-bold">UserName: {name}</h4>
+            <p>Age : {age}</p>
+            <p>Location : {city}</p>
+          </div>
+        );
+      }
+
+      function ButtonComponent({ label, onClick }) {
+        return (
+          <div class="flex justify-center items-center flex-col">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  mx-auto my-4"
+              onClick={onClick}
+            >
+              {label}
+            </button>
+          </div>
+        );
+      }
+      function login() {
+        alert("User login successfully");
+      }
+      function logout() {
+        alert("User logout successfully");
+      }
+
+      // UseState
+      const { useState } = React;
+
+      function Counter() {
+        const [count, setCount] = useState(0);
+        let data = 0;
+        function handleClick() {
+          setCount(count + 1);
+          data++;
+        }
+        return (
+          <div class="flex justify-center items-center flex-col h-screen">
+            <h1 class="text-3xl font-bold">Count: {count}</h1>
+            <h2 class="text-2xl font-bold">Data: {data}</h2>
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  mx-auto my-4"
+              onClick={handleClick}
+            >
+              +
+            </button>
+          </div>
+        );
+      }
+      function App() {
+        return (
+          <>
+            <Counter />
+          </>
+        );
+      }
+
+      // let element = (
+      //   // <React.Fragment>
+      //   //   <h1>Hello from React</h1>
+      //   //   <h2>I am learning React</h2>
+      //   // </React.Fragment>
+      //   <>
+      //     <h1>Hello from React</h1>
+      //   </>
+      // );
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

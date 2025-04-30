@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello from dom</div>
+
+    <!-- <script>
+      // let h1 = React.createElement(
+      //   "h1",
+      //   { id: "heading", style: { color: "red" } },
+      //   "Hello from React"
+      // );
+
+      // let btn = React.createElement(
+      //   "button",
+      //   { onClick: () => alert("btn is clicked form react") },
+      //   "click me"
+      // );
+
+      // let fruits = ["apple", "orange", "mango", "banana"];
+      // let ul = React.createElement(
+      //   "ul",
+      //   {},
+      //   fruits.map((fruit) => React.createElement("li", {}, fruit))
+      // );
+
+      //!Babel is like a translator for react
+
+      let root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script> -->
+
+    <!-- babel => transpiler for react -->
+    <script type="text/babel">
+      // let element = <h1>Hello </h1>;
+
+      let element = (
+        <div>
+          <h1>Hello</h1>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio
+            quia officiis placeat.
+          </p>
+        </div>
+      );
+      let root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script>
+  </body>
+</html>
