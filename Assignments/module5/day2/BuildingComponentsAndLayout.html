@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .header h1 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .highlight {
+        color: #a78bfa;
+      }
+      .plans {
+        border-top: 1px solid #ddd;
+      }
+      .plan-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .features {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .plan-name {
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      .price {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .btn {
+        background-color: #a78bfa;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const PlanFeature = ({ text }) => {
+        return (
+          <div className="feature">
+            <span>✅</span>
+            <span>{text}</span>
+          </div>
+        );
+      };
+
+      const PlanCard = ({
+        name,
+        price,
+        features,
+        buttonColor,
+        btnTextColor,
+      }) => {
+        return (
+          <div className="plan-card">
+            <div className="plan-name" style={{ width: "20%" }}>
+              {name}
+            </div>
+
+            <div className="features" style={{ width: "40%" }}>
+              {features.map((f, idx) => (
+                <PlanFeature key={idx} text={f} />
+              ))}
+            </div>
+
+            <div
+              className="price"
+              style={{ width: "20%", fontSize: "18px", fontWeight: "bold" }}
+            >
+              {price}
+            </div>
+
+            <div style={{ width: "20%" }}>
+              <button
+                className="btn"
+                style={{
+                  backgroundColor: buttonColor || "#a78bfa",
+                  color: btnTextColor || "white",
+                }}
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        );
+      };
+
+      const Header = () => (
+        <div className="header">
+          <h1>
+            The Right Plan for <span className="highlight">Your Business</span>
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+            quod in iure vero. Facilis magnam, sed officiis commodi labore odit.
+          </p>
+        </div>
+      );
+      const App = () => {
+        const features = [
+          "1 lorem ipsum",
+          "Lorem, ipsum dolor.",
+          "Monthly Updates",
+        ];
+        return (
+          <div className="container">
+            <Header />
+            <div className="plans">
+              <PlanCard
+                name="Starter"
+                price="Free"
+                features={features}
+                buttonColor="#d4d4d8"
+                btnTextColor="#a78bfa"
+              />
+              <PlanCard name="Lorem Plus" price="$32.00" features={features} />
+              <PlanCard
+                name="Lorem Pro"
+                price="$50.00"
+                features={features}
+                buttonColor="#d4d4d8"
+                btnTextColor="#a78bfa"
+              />
+            </div>
+          </div>
+        );
+      };
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
