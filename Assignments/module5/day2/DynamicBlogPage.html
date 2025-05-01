@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Blog Page</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      .blog {
+        padding: 16px;
+        margin-bottom: 16px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      .featured {
+        background-color: lightyellow;
+      }
+      h2 {
+        margin: 0 0 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const blogs = [
+        {
+          title: "React Basics",
+          content: "Learn the basics of React.",
+          isFeatured: true,
+        },
+        {
+          title: "Advanced React",
+          content: "Delve deeper into React.",
+          isFeatured: false,
+        },
+        {
+          title: "React Performance Tips",
+          content: "Optimize your React apps.",
+          isFeatured: true,
+        },
+      ];
+      const BlogPost = ({ title, content, isFeatured }) => {
+        const blogStyle = isFeatured ? "blog featured" : "blog";
+        return (
+          <div className={blogStyle}>
+            <h2>{title}</h2>
+            <p>{content}</p>
+          </div>
+        );
+      };
+      const App = () => {
+        return (
+          <div>
+            {blogs.map((blog, index) => (
+              <BlogPost
+                key={index}
+                title={blog.title}
+                content={blog.content}
+                isFeatured={blog.isFeatured}
+              />
+            ))}
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
