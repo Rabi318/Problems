@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reusable Card Component</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Card({ title, children }) {
+        const cardStyle = {
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          padding: "16px",
+          marginBottom: "16px",
+          boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+        };
+        const titleStyle = {
+          fontSize: "1.2em",
+          fontWeight: "bold",
+          marginBottom: "8px",
+        };
+        return (
+          <div style={cardStyle}>
+            <div style={titleStyle}>{title}</div>
+            <div>{children}</div>
+          </div>
+        );
+      }
+      function App() {
+        return (
+          <div>
+            <Card title="Card 1" children={<p>Card 1 content</p>} />
+            <Card title="Card 2" children={<p>Card 2 content</p>} />
+            <Card title="Card 3" children={<p>Card 3 content</p>} />
+            <Card title="Card 4">
+              <ul>
+                <li>Item one</li>
+                <li>Item two</li>
+                <li>Item three</li>
+              </ul>
+            </Card>
+          </div>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
