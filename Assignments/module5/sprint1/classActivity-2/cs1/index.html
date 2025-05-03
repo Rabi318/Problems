@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello from dom</div>
+    <script type="text/babel">
+      // function App() {
+      //   const [text, setText] = React.useState("Hello");
+      //   function changeText() {
+      //     setText("Welcome to React");
+      //   }
+      //   return (
+      //     <>
+      //       <div>
+      //         <h1>{text}</h1>
+      //         <button onClick={changeText}>Click Me</button>
+      //       </div>
+      //     </>
+      //   );
+      // }
+
+      // function App() {
+      //   const [count, setCount] = React.useState(0);
+
+      //   function increaseCount() {
+      //     //Batch update
+      //     // setCount(count + 1);
+      //     // setCount(count + 1);
+      //     // setCount(count + 1);
+
+      //     //Immediate update pass a callback inside the setter method
+      //     setCount((prevCount) => prevCount + 1);
+      //     setCount((prevCount) => prevCount + 1);
+      //     setCount((prevCount) => prevCount + 1);
+      //   }
+      //   return (
+      //     <>
+      //       <div>
+      //         <h1>Count: {count}</h1>
+      //         <button onClick={increaseCount}>+</button>
+      //       </div>
+      //     </>
+      //   );
+      // }
+
+      function UserProfile() {
+        const [user, setUser] = React.useState({ name: "Sachin", age: 21 });
+        function updateAge() {
+          setUser({ ...user, age: user.age + 1 });
+        }
+        return (
+          <div>
+            <h1>UserName: {user.name}</h1>
+            <h2>Age: {user.age}</h2>
+            <button onClick={updateAge}>Incerease Age</button>
+          </div>
+        );
+      }
+
+      function SimpleForm() {
+        const [name, setName] = React.useState("");
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          alert(`Hello ${name}`);
+          setName("");
+        };
+        return (
+          <form onSubmit={handleSubmit}>
+            <label for="name">Enter Your Name</label>
+            <input
+              type="text"
+              id="name"
+              name="username"
+              value={name}
+              required
+              onChange={(e) => setName(e.target.value)}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        );
+      }
+
+      function CompleteForm() {
+        const [formData, setFormData] = React.useState({
+          name: "",
+          password: "",
+          gender: "",
+          comments: "",
+        });
+        function handleSubmit(e) {
+          e.preventDefault();
+          console.log(formData);
+          setFormData({
+            name: "",
+            password: "",
+            gender: "",
+            comments: "",
+          });
+        }
+        function handleChange(e) {
+          const { name, value } = e.target;
+          setFormData({ ...formData, [name]: value });
+        }
+        return (
+          <form onSubmit={handleSubmit}>
+            <label>
+              Name:
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              Password:
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              Gender:{" "}
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+              >
+                <option value="male">Male</option>{" "}
+                <option value="female">Female</option>{" "}
+                <option value="other">Other</option>{" "}
+              </select>
+            </label>
+            <br />
+            <label>
+              Comments:
+              <textarea
+                name="comments"
+                value={formData.comments}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            <button type="submit">Submit</button>
+          </form>
+        );
+      }
+      function App() {
+        return (
+          <>
+            <CompleteForm />
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

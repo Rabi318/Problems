@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From DOM</div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function FetchData() {
+        const [movies, setMovies] = useState([]);
+        const [movieName, setMovieName] = useState("");
+        async function dataFetch() {
+          try {
+            const res = await fetch(
+              "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json"
+            );
+            const data = await res.json();
+            // console.log(data);
+            const moviesArray = Object.entries(data).map(([id, movie]) => ({
+              id,
+              ...movie,
+            }));
+            setMovies(moviesArray);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        async function addMovie() {
+          if (!movieName) {
+            return alert("Please enter movie name");
+          }
+          try {
+            const res = await fetch(
+              "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json",
+              {
+                method: "POST",
+                body: JSON.stringify({ title: movieName }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            setMovieName("");
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        return (
+          <>
+            <h2>React API Example</h2>
+            <button onClick={dataFetch}>Fetch</button>
+            <button onClick={addMovie}>Add Movie</button>
+            <input
+              type="text"
+              placeholder="Enter movie name "
+              value={movieName}
+              onChange={(e) => setMovieName(e.target.value)}
+            />
+            <ul>
+              {movies.map((post, index) => (
+                <li key={index}>{post.title}</li>
+              ))}
+            </ul>
+          </>
+        );
+      }
+
+      //using axios
+      function FetchUsigAxios() {
+        const [movies, setMovies] = useState([]);
+        const [movieName, setMovieName] = useState("");
+        async function fetchMovies() {
+          try {
+            const res = await axios.get(
+              "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json"
+            );
+            const data = res.data;
+            // console.log(data);
+            const moviesArray = Object.entries(data).map(([id, movie]) => ({
+              id,
+              ...movie,
+            }));
+            console.log(moviesArray);
+            setMovies(moviesArray);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        async function addMovie() {
+          try {
+            const res = await axios.post(
+              "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json",
+              { title: movieName }
+            );
+            setMovieName("");
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        return (
+          <>
+            <button onClick={fetchMovies}>Fetch</button>
+            <input
+              type="text"
+              placeholder="Enter movie name"
+              value={movieName}
+              onChange={(e) => setMovieName(e.target.value)}
+            />
+            <button onClick={addMovie}>Add Movie</button>
+            <ul>
+              {movies.map((post, index) => (
+                <li key={index}>{post.title}</li>
+              ))}
+            </ul>
+          </>
+        );
+      }
+      function App() {
+        return (
+          <>
+            <FetchUsigAxios />
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
