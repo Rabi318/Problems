@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From DOM</div>
+    <script type="text/babel">
+      function ControlledForm() {
+        const [username, setUsername] = React.useState("");
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          if (username.trim() === "") {
+            alert("Username cannot be empty");
+            return;
+          }
+          alert(`Hello ${username}`);
+        };
+        return (
+          <form onSubmit={handleSubmit}>
+            <label>
+              Username:
+              <input
+                type="text"
+                placeholder="Enter Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<h1>Hello, JSX!</h1>);
+    </script>
+  </body>
+</html>
