@@ -1,0 +1,154 @@
+/* Universal Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.light {
+  background: linear-gradient(to right, #ffffff, #f0f0f0);
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: linear-gradient(to right, #1e1e1e, #2c2c2c);
+  color: #f0f0f0;
+  transition: background 0.3s, color 0.3s;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 1rem;
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#themeToggle {
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  background: #6200ea;
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+#themeToggle:hover {
+  background: #3700b3;
+}
+
+form#feedbackForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+form#feedbackForm input,
+form#feedbackForm textarea {
+  padding: 0.5rem;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+form#feedbackForm input:focus,
+form#feedbackForm textarea:focus {
+  outline: 2px solid #6200ea;
+}
+
+form#feedbackForm button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #03dac6;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form#feedbackForm button:hover {
+  background: #018786;
+}
+
+.message {
+  font-weight: bold;
+  color: green;
+}
+
+.feedback-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feedback-item {
+  flex: 1 1 250px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.feedback-item:hover {
+  transform: scale(1.02);
+}
+
+.feedback-item h3 {
+  margin-bottom: 0.5rem;
+}
+
+.feedback-item small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.feedback-item button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.3rem 0.5rem;
+  background: #b00020;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.feedback-item button:hover {
+  background: #7f0000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app {
+    grid-template-rows: auto auto;
+  }
+  .feedback-list {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 769px) {
+  form#feedbackForm {
+    grid-template-columns: 1fr 1fr;
+  }
+  form#feedbackForm textarea {
+    grid-column: span 2;
+  }
+}

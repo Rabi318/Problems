@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From DOM</div>
+
+    <script type="text/babel">
+      const firebaseURL =
+        "https://moviedb-85cd6-default-rtdb.asia-southeast1.firebasedatabase.app/";
+
+      function ThemeToggle({ theme, toggleTheme }) {
+        return (
+          <button id="themeToggle" onClick={toggleTheme}>
+            Swith to {theme === "light" ? "Dark" : "Light"} Mode
+          </button>
+        );
+      }
+      function FeedbackForm({ onSubmit }) {
+        const [formData, setFormData] = React.useState({
+          name: "",
+          email: "",
+          comment: "",
+        });
+        const [message, setMessage] = React.useState("");
+        const handleChange = (e) => {
+          const { name, value } = e.target;
+          setFormData({ ...formData, [name]: value });
+        };
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          const { name, email, comment } = formData;
+          if (!name || !email || !comment) {
+            setMessage("All fields are required");
+            return;
+          }
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(email)) {
+            setMessage("Invalid email format");
+            return;
+          }
+          const newFeedback = {
+            ...formData,
+            timestamp: new Date().toISOString(),
+          };
+          try {
+            const response = await fetch(firebaseURL + "feedback.json", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(newFeedback),
+            });
+            if (response.ok) {
+              setFormData({
+                name: "",
+                email: "",
+                comment: "",
+              });
+              setMessage("Feedback submitted successfully!");
+              onSubmit();
+            }
+          } catch (error) {
+            console.log(error);
+            setMessage("An error occurred. Please try again later.");
+          }
+        };
+        return (
+          <form id="feedbackForm" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <textarea
+              name="comment"
+              placeholder="Your Feedback"
+              value={formData.comment}
+              onChange={handleChange}
+              required
+            ></textarea>
+            <button type="submit">Submit</button>
+            {message && <p className="message">{message}</p>}
+          </form>
+        );
+      }
+      function FeedbackItem({ feedback, onDelete }) {
+        return (
+          <div className="feedback-item">
+            <h3>{feedback.name}</h3>
+            <p>{feedback.comment}</p>
+            <small>{feedback.email}</small>
+            <button onClick={() => onDelete(feedback.id)}>Delete</button>
+          </div>
+        );
+      }
+      function FeedbackList({ feedbacks, onDelete }) {
+        return (
+          <div className="feedback-list">
+            {feedbacks.map((fb) => (
+              <FeedbackItem key={fb.id} feedback={fb} onDelete={onDelete} />
+            ))}
+          </div>
+        );
+      }
+      function App() {
+        const [feedbacks, setFeedbacks] = React.useState([]);
+        const [theme, setTheme] = React.useState(
+          localStorage.getItem("theme") || "light"
+        );
+        const fetchFeedbacks = async () => {
+          const res = await fetch(firebaseURL + "feedback.json");
+          const data = await res.json();
+          const loadedFeedbacks = [];
+          for (let key in data) {
+            loadedFeedbacks.push({ id: key, ...data[key] });
+          }
+          setFeedbacks(loadedFeedbacks.reverse());
+        };
+        const deleteFeedback = async (id) => {
+          await fetch(firebaseURL + `feedback/${id}.json`, {
+            method: "DELETE",
+          });
+          fetchFeedbacks();
+        };
+        const toggleTheme = () => {
+          const newTheme = theme === "light" ? "dark" : "light";
+          setTheme(newTheme);
+          localStorage.setItem("theme", newTheme);
+        };
+        React.useEffect(() => {
+          fetchFeedbacks();
+        }, []);
+        React.useEffect(() => {
+          document.body.className = theme;
+        }, [theme]);
+        return (
+          <>
+            <div className="app">
+              <header>
+                <h1>Feedback App</h1>
+                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              </header>
+              <main>
+                <FeedbackForm onSubmit={fetchFeedbacks} />
+                <FeedbackList feedbacks={feedbacks} onDelete={deleteFeedback} />
+              </main>
+            </div>
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
