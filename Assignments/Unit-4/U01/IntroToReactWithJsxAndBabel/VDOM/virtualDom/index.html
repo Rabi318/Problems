@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Count() {
+        const [count, setCount] = React.useState(0);
+        const [title, setTitle] = React.useState("React Title");
+        const heandleChange = () => {
+          setTitle(`React Title ${count + 1}`);
+          setCount(count + 1);
+        };
+        return (
+          <div>
+            <h2>{title}</h2>
+            <button onClick={heandleChange}>Change</button>
+            <p>DOM updated: {count}</p>
+          </div>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Count />);
+    </script>
+  </body>
+</html>

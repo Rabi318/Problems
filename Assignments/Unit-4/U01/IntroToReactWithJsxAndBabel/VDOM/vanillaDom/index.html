@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2 id="title">Vanilla Title</h2>
+    <button onclick="changeTitle()">Change</button>
+    <p>DOM updated: <span id="count">0</span></p>
+
+    <script>
+      let count = 0;
+      function changeTitle() {
+        count += 1;
+        document.getElementById("title").innerHTML = `Vanilla Title ${count}`;
+        document.getElementById("count").innerHTML = count;
+      }
+    </script>
+  </body>
+</html>
