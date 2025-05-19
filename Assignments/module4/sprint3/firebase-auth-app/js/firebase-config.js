@@ -4,7 +4,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 const firebaseConfig = {
   apiKey: "Your-api-key",
-  authDomain: "userdb-67b43.firebaseapp.com",
+  authDomain: "",
   databaseURL: "Your-database-url",
   projectId: "Your-project-id",
   storageBucket: "Your-storage-bucket",
