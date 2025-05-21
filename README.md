@@ -72,6 +72,13 @@ Here are the latest additions to the React assignment repo:
 - Uses default props for missing info
 - Clean layout with Tailwind CSS
 
+### 5. 👥 [User Profiles App](https://github.com/Rabi318/Problems/tree/main/Assignments/Unit-4/U01/ExploringuseEffectHook/fetch-display-userprofile)
+- Fetches user data from JSONPlaceholder API on load
+- Displays name, email, and city using reusable `UserCard` component
+- Case-insensitive search filter
+- Handles loading and error states
+- Tailwind-based responsive layout
+
 📌 Each app is built using **React** and **Tailwind CSS** for a clean and responsive interface.
 
 
