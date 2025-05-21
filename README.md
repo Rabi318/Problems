@@ -45,6 +45,28 @@ Here are some of the tasks you'll find in this repo:
 
 ---
 
+## 📅 React Assignments – 21 May 2025
+
+Here are the latest additions to the React assignment repo:
+
+### 1. 🔤 [AutoCorrect App](https://github.com/Rabi318/Problems/tree/main/Assignments/Unit-4/U01/IntroToViteAndReactLifeCycle/autoCorrect-app)
+- Live corrects common misspelled words as user types
+- Uses `useState` and a corrections dictionary
+- Bonus: Shows a correction count
+- Tailwind CSS UI
+
+### 2. 🌓 [Theme Toggle App](https://github.com/Rabi318/Problems/tree/main/Assignments/Unit-4/U01/ExploringuseEffectHook/theme-toggle)
+- Toggle between light and dark themes
+- Props-based styling and state with `useState`
+- Bonus: Theme is saved using `localStorage` with `useEffect`
+
+### 3. 📜 [Daily Quote Generator](https://github.com/Rabi318/Problems/tree/main/Assignments/Unit-4/U01/ExploringuseEffectHook/auto-quote-generator)
+- Fetches new quotes every 30 seconds from ZenQuotes API
+- “Get New Quote” button for manual refresh
+- Spinner during loading state
+- ⚠️ CORS note: Use Chrome CORS extension in dev
+
+📌 Each app is built using **React** and **Tailwind CSS** for a clean and responsive interface.
 
 
 
