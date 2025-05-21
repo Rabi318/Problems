@@ -1,21 +1,25 @@
-# 🧑‍💼 React ProfileCard Component
+# ✨ AutoCorrect App — React + Tailwind
 
-A reusable `ProfileCard` component built with **React** and **Tailwind CSS** that displays a user's basic profile information. This project is great for practicing props, conditional rendering, string manipulation, and component structuring.
-
----
-
-## 📦 Features
-
-- Accepts `name`, `age`, and `bio` as props
-- Displays profile info in a styled card layout
-- Truncates bio text to 100 characters and appends `"… Read More"` if it’s too long
-- Sets default values for `name` and `bio` if not provided
+A simple **React** application that autocorrects common misspelled words in real-time as the user types. This project demonstrates the use of `useState`, `props`, and basic string manipulation with a clean, reusable component structure.
 
 ---
 
-## 🚀 Technologies Used
+## 🚀 Features
 
-- React (with Vite)
+- ✅ Live autocorrection while typing
+- ✅ Detects and replaces misspelled words using a dictionary
+- ✅ Clean UI using **Tailwind CSS**
+- ✅ **Reusable `CorrectedText` component**
+- ✅ Word correction **counter**
+- ✅ Responsive layout with simple structure
+
+---
+
+## 🧠 Technologies Used
+
+- React (via [Vite](https://vitejs.dev))
 - Tailwind CSS
+- Functional components + Hooks (`useState`)
+- Props-based component communication
 
 ---
