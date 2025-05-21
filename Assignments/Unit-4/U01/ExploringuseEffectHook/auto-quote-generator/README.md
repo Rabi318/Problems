@@ -25,7 +25,7 @@ ZenQuotes does **not** include proper CORS headers by default.
 
 To avoid `CORS` errors during local development, install a Chrome extension like:
 
-🔗 [Allow CORS: Access-Control-Allow-Origin (Chrome Web Store)](https://chrome.google.com/webstore/detail/allow-cors-access-control/hnmpcagpplmpfojmgmnngilcnanddlhb)
+🔗 [Allow CORS: Access-Control-Allow-Origin (Chrome Web Store)](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
 
 > Make sure to enable it while testing the app in your local browser.  
 > For production, you'd need to use a proxy server or backend middleware.
