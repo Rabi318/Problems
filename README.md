@@ -66,6 +66,12 @@ Here are the latest additions to the React assignment repo:
 - Spinner during loading state
 - ⚠️ CORS note: Use Chrome CORS extension in dev
 
+### 4. 👤 [ProfileCard Component](https://github.com/Rabi318/Problems/tree/main/Assignments/Unit-4/U01/IntroToViteAndReactLifeCycle/user-profile-card)
+- Displays user name, age, and biography using props
+- Truncates bio if over 100 characters with “Read More…”
+- Uses default props for missing info
+- Clean layout with Tailwind CSS
+
 📌 Each app is built using **React** and **Tailwind CSS** for a clean and responsive interface.
 
 
