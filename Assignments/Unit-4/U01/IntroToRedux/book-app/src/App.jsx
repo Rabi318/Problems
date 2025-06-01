@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+import BookForm from "./components/BookForm";
+import FilterBar from "./components/FilterBar";
+import BookList from "./components/BookList";
 
 function App() {
   return (
