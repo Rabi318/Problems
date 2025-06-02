@@ -1,0 +1,60 @@
+.app-container {
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.sort-container {
+  margin-bottom: 16px;
+}
+
+.sort-select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.spinner {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.coffee-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.coffee-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.coffee-price {
+  font-size: 14px;
+  color: #555;
+}
