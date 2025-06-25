@@ -3,9 +3,9 @@
 //?ORMS = Object Relational Mapping System - SQL Database
 
 const express = require("express");
-const connectDB = require("./classActivity/configs/mongodb.config");
+const connectDB = require("./configs/mongodb.config");
 
-const userRoutes = require("./classActivity/routes/userRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
