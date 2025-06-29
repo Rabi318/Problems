@@ -35,7 +35,7 @@ router.get("/summary", async (req, res) => {
       (sum, user) => sum + user.address.length,
       0
     );
-    res.status(200).json({ totalUsers, totalAddresses });
+
     const userSummaries = users.map((u) => ({
       name: u.name,
       addressCount: u.address.length,
