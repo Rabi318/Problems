@@ -9,7 +9,9 @@ app.use(express.json());
 app.get("/test", (req, res) => {
   res.send("Test route is working!");
 });
-
+app.get("/login", (req, res) => {
+  res.send("Please Login again");
+});
 app.use("/users", require("./routers/userRouter"));
 app.use("/todos", require("./routers/todoRouter"));
 app.use((req, res) => {

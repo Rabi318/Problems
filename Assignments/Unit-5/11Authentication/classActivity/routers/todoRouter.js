@@ -4,9 +4,9 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-router.post("/add", authMiddleware, async (req, res) => {
+router.post("/add", authMiddleware(["user", "admin"]), async (req, res) => {
   try {
-    let todo = await Todo.create({ ...req.body, user: req.user });
+    let todo = await Todo.create({ ...req.body, user: req.user.userId });
     res.status(201).json({ msg: "Todo created", todo });
   } catch (error) {
     console.log(error);
