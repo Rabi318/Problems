@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const BlacklistToken = require("../models/blacklistTokemModel");
 
 const authMiddleware = (role) => {
   //checks the token
@@ -6,6 +7,11 @@ const authMiddleware = (role) => {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
       return res.status(401).json({ msg: "Unauthorized:Token Missing" });
+    }
+    //check the token is not present on the blacklist
+    let blackListTokenCheck = BlacklistToken.exists(token);
+    if (blackListTokenCheck) {
+      return res.status(401).json({ msg: "Unauthorized:Token blacklisted" });
     }
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {

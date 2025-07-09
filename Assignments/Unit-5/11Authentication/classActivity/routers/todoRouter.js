@@ -16,6 +16,10 @@ router.post("/add", authMiddleware(["user", "admin"]), async (req, res) => {
 
 router.get("/my-todos", async (req, res) => {
   try {
+    //check data is present in redis first
+    //if yes send the response from redis
+    //elese send the response from db, and store in redis
+
     const todos = await Todo.find({ user: req.user });
     res.status(200).json({ msg: "All todos", todos });
   } catch (error) {

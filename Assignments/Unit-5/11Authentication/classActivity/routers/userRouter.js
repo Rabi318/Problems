@@ -5,6 +5,8 @@ const User = require("../models/userModel");
 const Todo = require("../models/todoModel");
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
+const nodemailer = require("nodemailer");
+const BlacklistToken = require("../models/blacklistTokemModel");
 
 const router = express.Router();
 
@@ -129,5 +131,73 @@ router.get(
     // res.json({ msg: "Login Success" });
   }
 );
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.GOOGLE_APP_EMAIL,
+    pass: process.env.GOOGLE_APP_PASSWORD,
+  },
+});
+//sending emails
+router.get("/send-email", async (req, res) => {
+  try {
+    const info = await transporter.sendMail({
+      from: '"rabinarayan" <rabinarayan@gmail.email>',
+      to: "bar@example.com, baz@example.com",
+      subject: "Hello ✔",
+      text: "Hello world?", // plain‑text body
+      html: "<b>Hello world?</b>", // HTML body
+    });
+    res.status(201).json({ msg: "Email Sent", info });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+//forget password
+router.post("/forget-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ msg: "User Not Found" });
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+      expiresIn: 120,
+    });
+    let resetPasswordLink = `http://localhost:3000/users/reset-password?token=${token}`;
+    res.json({
+      msg: "Password Reset Link send to Registered Email",
+      link: resetPasswordLink,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+router.post("/reset-password", async (req, res) => {
+  try {
+    const { token } = req.query;
+    const { password } = req.body;
+    res.json({ msg: token });
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    if (decoded) {
+      const user = await User.findOne({ _id: decoded.userId });
+      if (!user) return res.status(404).json({ msg: "User Not Found" });
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword;
+      await user.save();
+      //blacklist the token to prevent reuse
+      await BlacklistToken.create({ toekn: token });
+      res.status(201).json({ msg: "Password Reset Successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
