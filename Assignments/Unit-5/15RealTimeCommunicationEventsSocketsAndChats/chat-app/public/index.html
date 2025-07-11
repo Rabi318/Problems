@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Real-Time Chat</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="login">
+      <input id="name" placeholder="Enter your name" />
+      <label><input type="checkbox" id="isAdmin" /> I'm admin</label>
+      <button onclick="register()">Join</button>
+    </div>
+
+    <div id="chat" style="display: none">
+      <div id="users"></div>
+      <div id="messages"></div>
+      <input id="messageInput" placeholder="Type a message" />
+      <button onclick="sendMessage()">Send</button>
+      <button onclick="disconnect()">Disconnect</button>
+      <div id="adminMsg">
+        <input id="adminInput" placeholder="Admin announcement" />
+        <button onclick="sendAdmin()">Send Admin Msg</button>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>
