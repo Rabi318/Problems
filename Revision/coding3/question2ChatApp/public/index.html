@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Real-Time Group Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          sans-serif;
+      }
+      body {
+        margin: 0;
+        background: #0b1220;
+        color: #e7ecf3;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        height: 100vh;
+      }
+      .sidebar {
+        background: #0f172a;
+        border-right: 1px solid #1f2a44;
+        padding: 16px;
+      }
+      .main {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+      .topbar {
+        padding: 12px 16px;
+        border-bottom: 1px solid #1f2a44;
+        background: #0f172a;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .chip {
+        background: #1f2a44;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+      .users {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .user {
+        background: #111b33;
+        padding: 8px 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .user small {
+        opacity: 0.7;
+      }
+      .messages {
+        padding: 16px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .msg {
+        padding: 10px 12px;
+        border-radius: 12px;
+        max-width: 70%;
+        line-height: 1.35;
+      }
+      .msg.me {
+        align-self: flex-end;
+        background: #2563eb;
+        color: white;
+      }
+      .msg.other {
+        align-self: flex-start;
+        background: #1f2a44;
+      }
+      .msg.admin {
+        background: #a21caf;
+        color: white;
+      }
+      .msg.system {
+        background: #334155;
+        color: #cbd5e1;
+        font-style: italic;
+      }
+      .composer {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid #1f2a44;
+        background: #0f172a;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 12px;
+        background: #0b1220;
+        color: #e7ecf3;
+        border: 1px solid #1f2a44;
+        border-radius: 10px;
+      }
+      button {
+        padding: 10px 14px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #334155;
+      }
+      button.warning {
+        background: #ef4444;
+      }
+      form {
+        display: flex;
+        gap: 8px;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .note {
+        font-size: 12px;
+        opacity: 0.8;
+        margin-top: 6px;
+      }
+      .muted {
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h2>Group Chat</h2>
+        <div id="authArea">
+          <form id="registerForm">
+            <input
+              id="nameInput"
+              type="text"
+              placeholder="Enter your name"
+              required
+            />
+            <button type="submit">Join</button>
+          </form>
+          <div class="note">
+            Admin name is reserved as: <strong id="adminNameLabel"></strong>
+          </div>
+        </div>
+        <div id="userArea" style="display: none">
+          <div class="row">
+            <span>Signed in as:</span>
+            <span class="chip" id="whoami"></span>
+          </div>
+          <button class="warning" id="disconnectBtn">Disconnect</button>
+        </div>
+
+        <h3 style="margin-top: 20px">Online Users</h3>
+        <div id="users" class="users"></div>
+      </aside>
+
+      <section class="main">
+        <div class="topbar">
+          <span class="chip">Realtime</span>
+          <span class="chip">Socket.IO</span>
+          <span class="chip">Redis + MongoDB Backup</span>
+        </div>
+
+        <div id="messages" class="messages"></div>
+
+        <div class="composer">
+          <input
+            id="messageInput"
+            type="text"
+            placeholder="Type a message..."
+            disabled
+          />
+          <button id="sendBtn" disabled>Send</button>
+          <button
+            id="adminBtn"
+            class="secondary"
+            title="Admin broadcast"
+            disabled
+          >
+            Broadcast
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const ADMIN_NAME = ""; // purely visual; server enforces admin name
+      document.getElementById("adminNameLabel").textContent =
+        window.ADMIN_ENV || "admin";
+
+      const socket = io();
+
+      // Simple state
+      let myName = null;
+      let isAdmin = false;
+
+      // Elements
+      const registerForm = document.getElementById("registerForm");
+      const nameInput = document.getElementById("nameInput");
+      const whoami = document.getElementById("whoami");
+      const messagesEl = document.getElementById("messages");
+      const usersEl = document.getElementById("users");
+      const msgInput = document.getElementById("messageInput");
+      const sendBtn = document.getElementById("sendBtn");
+      const adminBtn = document.getElementById("adminBtn");
+      const disconnectBtn = document.getElementById("disconnectBtn");
+      const authArea = document.getElementById("authArea");
+      const userArea = document.getElementById("userArea");
+
+      // UI helpers
+      function addMessage({ from, content, type, timestamp }) {
+        const div = document.createElement("div");
+        const mine = from === myName && type === "user";
+        div.className = `msg ${
+          type === "admin"
+            ? "admin"
+            : type === "system"
+            ? "system"
+            : mine
+            ? "me"
+            : "other"
+        }`;
+        const time = new Date(timestamp).toLocaleTimeString();
+        const label = type === "system" ? "" : `<strong>${from}</strong> • `;
+        div.innerHTML = `${label}<small class="muted">${time}</small><br>${escapeHtml(
+          content
+        )}`;
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function escapeHtml(s) {
+        return s
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      function renderUsers(list) {
+        usersEl.innerHTML = "";
+        list.forEach((u) => {
+          const row = document.createElement("div");
+          row.className = "user";
+          row.innerHTML = `<span>${escapeHtml(u.name)}</span>${
+            u.isAdmin ? "<small>admin</small>" : ""
+          }`;
+          usersEl.appendChild(row);
+        });
+      }
+
+      function setChatEnabled(enabled) {
+        msgInput.disabled = !enabled;
+        sendBtn.disabled = !enabled;
+        adminBtn.disabled = !enabled || !isAdmin;
+      }
+
+      // Events
+      registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = nameInput.value.trim();
+        if (!name) return;
+        socket.emit("register", { name });
+      });
+
+      sendBtn.addEventListener("click", () => {
+        const content = msgInput.value.trim();
+        if (!content) return;
+        socket.emit("chatMessage", content);
+        msgInput.value = "";
+      });
+
+      msgInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          sendBtn.click();
+        }
+      });
+
+      adminBtn.addEventListener("click", () => {
+        const content = msgInput.value.trim();
+        if (!content) return;
+        socket.emit("adminBroadcast", content);
+        msgInput.value = "";
+      });
+
+      disconnectBtn.addEventListener("click", () => {
+        socket.emit("disconnectManual");
+      });
+
+      // Socket listeners
+      socket.on("chatHistory", (history) => {
+        // Switch UI into chat mode
+        myName = nameInput.value.trim();
+        authArea.style.display = "none";
+        userArea.style.display = "block";
+        whoami.textContent = myName;
+        setChatEnabled(true);
+        // server decides admin; only enable button after onlineUsers event arrives
+        messagesEl.innerHTML = "";
+        history.forEach(addMessage);
+      });
+
+      socket.on("message", addMessage);
+
+      socket.on("onlineUsers", (list) => {
+        renderUsers(list);
+        // update my admin flag based on server’s truth
+        const me = list.find((u) => u.name === myName);
+        isAdmin = !!(me && me.isAdmin);
+        setChatEnabled(true);
+      });
+
+      socket.on("errorMessage", (text) => {
+        alert(text);
+      });
+
+      // When server disconnects, lock UI
+      socket.on("disconnect", () => {
+        setChatEnabled(false);
+        authArea.style.display = "block";
+        userArea.style.display = "none";
+        messagesEl.innerHTML +=
+          '<div class="msg system">Disconnected from server.</div>';
+      });
+    </script>
+
+    <script>
+      // expose ADMIN_NAME from server env in a simple way
+      fetch("/health").then(() => {
+        // no-op, just ensures server is reachable
+      });
+      // Not strictly needed since server enforces admin by name.
+      document.getElementById("adminNameLabel").textContent =
+        new URLSearchParams(location.search).get("admin") || "admin";
+    </script>
+  </body>
+</html>
