@@ -8,12 +8,20 @@ interface Props {
 
 const TaskInput: React.FC<Props> = ({ onTaskAdded }) => {
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const addTask = async () => {
-    if (!title.trim()) return;
-    await API.post("/tasks", { title });
-    setTitle("");
-    onTaskAdded();
+    try {
+      setLoading(true);
+      if (!title.trim()) return;
+      await API.post("/tasks", { title });
+      setTitle("");
+      onTaskAdded();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,7 +37,7 @@ const TaskInput: React.FC<Props> = ({ onTaskAdded }) => {
         onClick={addTask}
         className="bg-blue-500 text-white px-4 py-2 rounded"
       >
-        Add
+        {loading ? "Adding..." : "Add Task"}
       </button>
     </div>
   );
