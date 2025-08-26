@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce</title>
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .continer{
+      width: 300px;
+      position: relative;
+    }
+    #search-input{
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    #suggestions{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: white;
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="container"">
+    <input type="text" id="search-input" placeholder="Search..">
+    <ul id="suggestions"></ul>
+
+  </div>
+</body>
+<script>
+  const items = [
+  "Apple", "Banana", "Orange", "Mango", "Grapes",
+  "Pineapple", "Watermelon", "Cherry", "Papaya", "Strawberry",
+  "Kiwi", "Guava", "Peach", "Plum", "Apricot",
+  "Blueberry", "Raspberry", "Pear", "Lychee", "Coconut",
+  "Laptop", "Mobile", "Tablet", "Headphones", "Charger",
+  "Monitor", "Keyboard", "Mouse", "Speaker", "Smartwatch"
+];
+
+const searchInput = document.getElementById('search-input');
+const suggestionsBox = document.getElementById('suggestions');
+//Debounce fun
+function debounce(fn, delay){
+  let timeout;
+  return function(...args){
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  }
+}
+
+//search
+function searchItems(query){
+  suggestionsBox.innerHTML = '';
+  if(!query) return;
+  const results = items.filter(item=>
+    item.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+  );
+  if(results.length === 0){
+    const li = document.createElement('li');
+    li.textContent = 'No results found';
+    suggestionsBox.appendChild(li);
+    return;
+  }
+  results.forEach(item=>{
+    const li = document.createElement('li');
+    li.textContent = item;
+    suggestionsBox.appendChild(li);
+  })
+}
+const deboundedSearch = debounce(function(){
+  const query = searchInput.value.trim();
+  searchItems(query);
+}, 500);
+searchInput.addEventListener('input', deboundedSearch);
+
+
+</script>
+</html>
