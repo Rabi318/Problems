@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
 const CountdownTimer = () => {
-  const [time, setTime] = useState(""); // user input (seconds)
-  const [remainingTime, setRemainingTime] = useState(0); // countdown
+  const [time, setTime] = useState(""); 
+  const [remainingTime, setRemainingTime] = useState(0); 
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef(null);
@@ -75,6 +75,10 @@ const CountdownTimer = () => {
     setIsPaused(false);
     setRemainingTime(0);
     setTime("");
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
   };
 
   // Cleanup on unmount
