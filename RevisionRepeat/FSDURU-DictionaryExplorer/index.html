@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dictionary App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search for a word..."
+        />
+        <button id="modeToggle">🌙</button>
+      </div>
+
+      <div class="content">
+        <!-- Search Results -->
+        <div class="results">
+          <h2>Search Results</h2>
+          <div id="resultsBox"></div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="suggestions">
+          <h2>Suggestions</h2>
+          <ul id="suggestionsList"></ul>
+        </div>
+      </div>
+
+      <!-- Search History -->
+      <div class="history">
+        <h2>Search History</h2>
+        <div id="historyBox"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
